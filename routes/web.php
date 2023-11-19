@@ -18,6 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/redis',[RedisController::class,'index']);
-Route::get('/redis2',[RedisController::class,'index2']);
-Route::get('/redis3',[RedisController::class,'index3']);
+//Route::get('/redis',[RedisController::class,'index']);
+//Route::get('/redis2',[RedisController::class,'index2']);

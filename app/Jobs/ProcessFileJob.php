@@ -28,18 +28,9 @@ class ProcessFileJob implements ShouldQueue
     /**
      * Execute the job.
      */
-    public function handle(): void
+    public function handle()
     {
-        if (!$this->acquireLock()) {
-            dd("Failed To Get The File");
-            return;
-        }
-
-        dump("File Processed");
-
-
-        // Release the lock
-        $this->releaseLock();
+        $this->acquireLock();
     }
 
     private function acquireLock(): bool
@@ -49,9 +40,6 @@ class ProcessFileJob implements ShouldQueue
 
         $isLockAcquired = Redis::setnx($lockKey, $lockValue);
 
-        // if ($isLockAcquired) {
-        //     Redis::expire($lockKey, LOCK_TIMEOUT); // Set lock expiration time
-        // }
 
         return $isLockAcquired;
     }

@@ -17,7 +17,4 @@ class RedisController extends Controller
         dd($t);
     }
 
-    public function index3(){
-        ProcessFileJob::dispatch("0987654321");
-    }
 }
