@@ -22,6 +22,7 @@ class TransformerController extends Controller
 
         $message['function']=$routeName;
         $message['method']=$method;
+        $message['request']=$request;
 
         if(count($urlParameters) >0){
             $message['urlParameters']=[];

@@ -26,7 +26,7 @@ class Facade extends BaseRepository
             $serviceFiles = scandir($servicesDirectory);
 
             foreach ($serviceFiles as $serviceFile) {
-                if (strpos($serviceFile, '.php') !== false) {
+                if (strpos($serviceFile, '.php') !== false && $serviceFile !== 'Service.php') {
                     $serviceClassName = str_replace('.php', '', $serviceFile);
                     $serviceClass = app()->make("App\\Services\\{$serviceClassName}");
 
