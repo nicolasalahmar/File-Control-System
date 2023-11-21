@@ -21,9 +21,23 @@ class FileService extends Service{
                 'checked'=>1
             ]);
 
-            return $this->response(true,$file,"Checked In Successfully");
+            $message['response']=[
+                "success" => true,
+                "data" => $file,
+                "message" => "Checked In Successfully",
+            ];
+
+            return $message;
         }else{
-            return $this->response(false,[],"Check In Failed");
+
+            $message['response']=[
+                "success" => false,
+                "data" =>[],
+                "message" => "Check In Failed",
+            ];
+
+            return $message;
+
         }
     }
 

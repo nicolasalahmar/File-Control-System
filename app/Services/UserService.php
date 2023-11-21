@@ -21,7 +21,14 @@ class UserService extends Service{
         $user = User::where('email', $data['email'])->first();
 
         if (!$user || !Hash::check($data['password'], $user->password)) {
-            return $this->response(false, $user,"Incorrect username or password");
+            $message['response']=[
+                "success" => false,
+                "data" => $user,
+                "message" => "Incorrect username or password",
+            ];
+
+            return $message;
+
 
         }
 
@@ -32,7 +39,14 @@ class UserService extends Service{
             'token' => $token
         ];
 
-        return $this->response(true, $res,"Created user successfully");
+        $message['response']=[
+            "success" => true,
+            "data" => $res,
+            "message" => "Created user successfully",
+        ];
+
+        return $message;
+
     }
     public function logOut($message): \Illuminate\Http\JsonResponse
     {
@@ -40,7 +54,15 @@ class UserService extends Service{
         $res = [
             'message' => 'user logged out'
         ];
-        return $this->response(true, $res,"Logged out user successfully");
+
+        $message['response']=[
+            "success" => true,
+            "data" => $res,
+            "message" => "Logged out user successfully",
+        ];
+
+        return $message;
+
     }
     public function register($message): \Illuminate\Http\JsonResponse
     {
@@ -56,6 +78,13 @@ class UserService extends Service{
             'password' => bcrypt($data['password'])
         ]);
 
-        return $this->response(true, $user,"Created user successfully");
+        $message['response']=[
+            "success" => true,
+            "data" => $user,
+            "message" => "Created user successfully",
+        ];
+
+        return $message;
+
     }
 }
