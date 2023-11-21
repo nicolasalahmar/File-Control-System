@@ -8,6 +8,27 @@ use Illuminate\Support\Facades\Redis;
 
 class FileService extends Service{
 
+    public function checkIn($id){
+
+        $file = File::getObjectDAO($id);
+
+        if($file->checked == 0){
+
+            $file->updateObjectDAO([
+                'checked'=>1,
+                'version'=>$file->version+1
+            ],
+                [
+                    'id'=>$id,
+                    'version'=>$file->version,
+                ]);
+
+            return $file;
+        }else{
+
+            return null;
+        }
+    }
 
     public function getFiles(){
         $files = File::get()->toArray();

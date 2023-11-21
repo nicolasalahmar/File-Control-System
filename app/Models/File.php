@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
-class File extends Model
+class File extends GenericModel
 {
     use HasFactory;
 
@@ -15,7 +16,9 @@ class File extends Model
       'mime_type',
       'size',
       'checked',
+        'version'
     ];
+
 
 
 }

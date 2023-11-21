@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Validator;
 
 class UserService extends Service{
 
-    public function logIn($message): \Illuminate\Http\JsonResponse
+    public function logIn($bodyParameters)
     {
-        $data = Validator::make($message['bodyParameters'], [
+        $data = Validator::make($bodyParameters, [
             'email' => 'required|email',
             'password' => 'required|string'
         ])->validated();
@@ -21,15 +21,8 @@ class UserService extends Service{
         $user = User::where('email', $data['email'])->first();
 
         if (!$user || !Hash::check($data['password'], $user->password)) {
-            $message['response']=[
-                "success" => false,
-                "data" => $user,
-                "message" => "Incorrect username or password",
-            ];
 
-            return $message;
-
-
+            return null;
         }
 
         $token = $user->createToken('apiToken')->plainTextToken;
@@ -39,34 +32,16 @@ class UserService extends Service{
             'token' => $token
         ];
 
-        $message['response']=[
-            "success" => true,
-            "data" => $res,
-            "message" => "Created user successfully",
-        ];
-
-        return $message;
-
+        return $res;
     }
-    public function logOut($message): \Illuminate\Http\JsonResponse
+    public function logOut()
     {
-        auth()->user()->tokens()->delete();
-        $res = [
-            'message' => 'user logged out'
-        ];
-
-        $message['response']=[
-            "success" => true,
-            "data" => $res,
-            "message" => "Logged out user successfully",
-        ];
-
-        return $message;
-
+        $res = auth()->user()->tokens()->delete();
+        return true;
     }
-    public function register($message): \Illuminate\Http\JsonResponse
+    public function register($bodyParameters)
     {
-        $data = Validator::make($message['bodyParameters'], [
+        $data = Validator::make($bodyParameters, [
             'name' => 'required|string',
             'email' => 'required|string|unique:users,email',
             'password' => 'required|string'
@@ -78,13 +53,6 @@ class UserService extends Service{
             'password' => bcrypt($data['password'])
         ]);
 
-        $message['response']=[
-            "success" => true,
-            "data" => $user,
-            "message" => "Created user successfully",
-        ];
-
-        return $message;
-
+        return $user;
     }
 }

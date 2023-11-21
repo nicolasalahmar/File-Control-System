@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('mime_type');
             $table->unsignedBigInteger('size');
             $table->tinyInteger("checked")->default(0);
+            $table->bigInteger('version')->default(0);
             $table->timestamps();
         });
     }
