@@ -20,6 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/checkIn/{id}',[TransformerController::class,'transform'])->name('checkIn');
+Route::get('/getFiles',[TransformerController::class,'transform'])->name('getFiles');
 
 Route::post('/auth/logIn',[TransformerController::class,'transform'])->name('logIn');
 Route::post('/auth/logOut',[TransformerController::class,'transform'])->middleware(['auth:sanctum'])->name('logOut');

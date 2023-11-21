@@ -26,4 +26,13 @@ class FileService extends Service{
             return $this->response(false,[],"Check In Failed");
         }
     }
+
+    public function getFiles(){
+        $files = File::get()->toArray();
+        if(count($files)>0){
+            return $this->response(true,$files,"Files Fetched Successfully");
+        }else{
+            return $this->response(false,[],"No Files Found");
+        }
+    }
 }
