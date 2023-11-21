@@ -2,6 +2,11 @@
 
 namespace App\Repositories;
 
+use App\Jobs\ProcessFileJob;
+use App\Models\File;
+use App\Services\FileService;
+use App\Services\UserService;
+use Illuminate\Support\Facades\Redis;
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 //use Your Model
 
@@ -10,6 +15,13 @@ use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
  */
 class Facade extends BaseRepository
 {
+
+    public function __construct()
+    {
+        $fileService = new FileService();
+        $userServce = new UserService();
+    }
+
     /**
      * @return string
      *  Return the model
@@ -19,25 +31,23 @@ class Facade extends BaseRepository
         return \App\Models\GenericModel::class;
     }
 
-    public function callService($message){
-        $servicesDirectory = app()->path('Services');
+    public function checkIn($message){
+        $id = $message['urlParameters']['id'];
 
-        if(isset($servicesDirectory) && $servicesDirectory != ""){
-            $serviceFiles = scandir($servicesDirectory);
+        $lockKey = "file_lock:$id";
+        $redisFileStatus = Redis::get($lockKey);
 
-            foreach ($serviceFiles as $serviceFile) {
-                if (strpos($serviceFile, '.php') !== false && $serviceFile !== 'Service.php') {
-                    $serviceClassName = str_replace('.php', '', $serviceFile);
-                    $serviceClass = app()->make("App\\Services\\{$serviceClassName}");
+        if($redisFileStatus == null){
+            ProcessFileJob::dispatch($id);
 
-                    if (method_exists($serviceClass, $message['function'])) {
-                        $result = call_user_func([$serviceClass, $message['function']], $message);
-                        return $result;
-                    }
-                }
-            }
+            $file = File::where('id',$id)->first();
+            $file->update([
+                'checked'=>1
+            ]);
+
+            return $response(true,$file,"Checked In Successfully");
+        }else{
+            return $this->response(false,[],"Check In Failed");
         }
-
     }
-
 }

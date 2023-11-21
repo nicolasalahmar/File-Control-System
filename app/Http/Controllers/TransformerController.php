@@ -42,7 +42,8 @@ class TransformerController extends Controller
         }
 
         $facade = new Facade();
-        $result = $facade->callService($message);
+        $func = $message['function'];
+        $result = call_user_func($facade->$func($message));
 
         return response()->json($result['response']);
     }
