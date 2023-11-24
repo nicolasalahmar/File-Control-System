@@ -2,12 +2,9 @@
 
 namespace App\Repositories;
 
-use App\Jobs\ProcessFileJob;
-use App\Models\File;
 use App\Services\FileService;
 use App\Services\UserService;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Redis;
+use App\Services\GroupService;
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 //use Your Model
 
@@ -19,10 +16,15 @@ class Facade extends BaseRepository
 
     private $fileService;
     private $userService;
-    public function __construct()
+    private $groupService;
+
+    private $message;
+    public function __construct($message)
     {
         $this->fileService = new FileService();
         $this->userService = new UserService();
+        $this->groupService = new GroupService();
+        $this->message = $message;
     }
 
     /**
@@ -34,69 +36,75 @@ class Facade extends BaseRepository
         return \App\Models\GenericModel::class;
     }
 
-    public function checkIn($message){
-        $id =  $message['urlParameters']['id'];
+    public function response($instance,$successMessage,$errorMessage)
+    {
+        return $this->message['response']=
+            [
+                "success" => $instance != null,
+                "data" => $instance ?? null,
+                "message" => $instance != null ? $successMessage:$errorMessage,
+            ];
 
+    }
+
+    /************
+        Files
+    **************/
+
+    public function checkIn(){
+        $id =  $this->message['urlParameters']['id'];
         $file = $this->fileService->checkIn($id);
-
-        $message['response']=[
-            "success" => $file != null,
-            "data" => $file ?? null,
-            "message" => $file != null ? "Checked In Successfully":"Check In Failed",
-        ];
-
-        return $message;
+        $this->message['response']=$this->response($file,"Checked In Successfully","Check In Failed");
+        return $this->message;
     }
 
-    public function getFiles($message){
+    public function getFiles(){
         $files = $this->fileService->getFiles();
+        $this->message['response']=$this->response($files,"Files Fetched Successfully","No Files Found");
 
-        $message['response']=[
-            "success" => $files != null,
-            "data" => $files ?? null,
-            "message" => $files != null ? "Files Fetched Successfully":"No Files Found",
-        ];
-
-        return $message;
+        return $this->message;
     }
 
-    public function uploadFiles($message){
-        $files = $this->fileService->uploadFiles($message['bodyParameters']);
-        $message['response']=[
-            "success" => $files != null,
-            "data" => $files ?? null,
-            "message" => $files != null ? "Files Uploaded successfully":"Files Upload Failed",
-        ];
-        return $message;
+    public function uploadFiles(){
+        $files = $this->fileService->uploadFiles($this->message['bodyParameters']);
+        $this->message['response']=$this->response($files,"Files Uploaded successfully","Files Upload Failed");
+
+        return $this->message;
     }
 
-    public function logIn($message){
-        $res = $this->userService->logIn($message['bodyParameters']);
-        $message['response']=[
-            "success" => $res != null,
-            "data" => $res ?? null,
-            "message" => $res != null ? "Logged in successfully":"Incorrect username or password",
-        ];
-        return $message;
+    /************
+        User Auth
+    **************/
+    public function logIn(){
+        $res = $this->userService->logIn($this->message['bodyParameters']);
+        $this->message['response']=$this->response($res,"Logged in successfully","Incorrect username or password");
+
+        return $this->message;
     }
 
-    public function register($message){
-        $res = $this->userService->register($message['bodyParameters']);
-        $message['response']=[
-            "success" => $res != null,
-            "data" => $res ?? null,
-            "message" => $res != null ? "Created user successfully":"Error creating user",
-        ];
-        return $message;
+    public function register(){
+        $res = $this->userService->register($this->message['bodyParameters']);
+        $this->message['response']=$this->response($res,"Created user successfully","Error creating user");
+
+        return $this->message;
     }
 
-    public function logOut($message){
-        $res = $this->userService->logOut($message['bodyParameters']);
-        $message['response']=[
-            "success" => $res != null,
-            "data" => $res ?? null,
-            "message" => $res != null ? "Logged out user successfully":"Error logging out user",
-        ];
-        return $message;
+    public function logOut(){
+        $res = $this->userService->logOut($this->message['bodyParameters']);
+        $this->message['response']=$this->response($res,"Logged out user successfully","Error logging out user");
+
+        return $this->message;
+    }
+
+    /************
+        Group
+    **************/
+
+    public function createGroup(){
+
+        $group = $this->groupService->createGroup($this->message['bodyParameters']);
+        $this->message['response']=$this->response($group,"Group created successfully","Failed To Create Group");
+
+        return $this->message;
     }
 }

@@ -41,9 +41,8 @@ class TransformerController extends Controller
             }
         }
 
-        $facade = new Facade();
         $func = $message['function'];
-
+        $facade = new Facade($message);
         $result = $facade->$func($message);
 
         return response()->json($result['response']);
