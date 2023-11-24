@@ -16,7 +16,8 @@ class File extends GenericModel
       'mime_type',
       'size',
       'checked',
-        'version'
+      'version',
+      'user_id',
     ];
 
 

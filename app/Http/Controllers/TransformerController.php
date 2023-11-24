@@ -33,8 +33,8 @@ class TransformerController extends Controller
 
         if(isset($method) && $method=="POST"){
             $bodyParamaters = $request->all();
+            $message['bodyParameters']=[];
             if(count($bodyParamaters)>0){
-                $message['bodyParameters']=[];
                 foreach($bodyParamaters as $key=>$value){
                     $message['bodyParameters'][$key]=$value;
                 }

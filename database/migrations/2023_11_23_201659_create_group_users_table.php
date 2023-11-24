@@ -11,30 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('files', function (Blueprint $table) {
+        Schema::create('group_users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('path');
-            $table->string('mime_type');
-            $table->unsignedBigInteger('size');
-            $table->tinyInteger("checked")->default(0);
-            $table->bigInteger('version')->default(0);
             $table->timestamps();
         });
-
-        Schema::table('files', function($table) {
+        Schema::table('group_users', function($table) {
+            $table->unsignedBigInteger('group_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
-
-
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('files');
+        Schema::dropIfExists('group_users');
     }
 };

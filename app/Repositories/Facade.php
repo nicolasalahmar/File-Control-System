@@ -48,6 +48,28 @@ class Facade extends BaseRepository
         return $message;
     }
 
+    public function getFiles($message){
+        $files = $this->fileService->getFiles();
+
+        $message['response']=[
+            "success" => $files != null,
+            "data" => $files ?? null,
+            "message" => $files != null ? "Files Fetched Successfully":"No Files Found",
+        ];
+
+        return $message;
+    }
+
+    public function uploadFiles($message){
+        $files = $this->fileService->uploadFiles($message['bodyParameters']);
+        $message['response']=[
+            "success" => $files != null,
+            "data" => $files ?? null,
+            "message" => $files != null ? "Files Uploaded successfully":"Files Upload Failed",
+        ];
+        return $message;
+    }
+
     public function logIn($message){
         $res = $this->userService->logIn($message['bodyParameters']);
         $message['response']=[
