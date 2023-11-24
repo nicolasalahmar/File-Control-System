@@ -58,7 +58,7 @@ class Facade extends BaseRepository
         return $this->message;
     }
 
-    public function getFiles(){
+    public function getMyFiles(){
         $files = $this->fileService->getFiles();
         $this->message['response']=$this->response($files,"Files Fetched Successfully","No Files Found");
 
@@ -104,6 +104,32 @@ class Facade extends BaseRepository
 
         $group = $this->groupService->createGroup($this->message['bodyParameters']);
         $this->message['response']=$this->response($group,"Group created successfully","Failed To Create Group");
+
+        return $this->message;
+    }
+
+    public function addFilesToGroup(){
+        $res = $this->groupService->manageElementsInGroup("file","attach",$this->message['bodyParameters']);
+        $this->message['response']=$this->response($res,"Files Added To Group","Failed To Add Files To Group");
+
+        return $this->message;
+    }
+    public function addUsersToGroup(){
+        $res = $this->groupService->manageElementsInGroup("user","attach",$this->message['bodyParameters']);
+        $this->message['response']=$this->response($res,"Users Added To Group","Failed To Add Users To Group");
+
+        return $this->message;
+    }
+    public function removeFilesFromGroup(){
+        $res = $this->groupService->manageElementsInGroup("file","detach",$this->message['bodyParameters']);
+        $this->message['response']=$this->response($res,"Files Removed From Group","Failed To Remove Files From Group");
+
+
+        return $this->message;
+    }
+    public function removeUsersFromGroup(){
+        $res = $this->groupService->manageElementsInGroup("user","detach",$this->message['bodyParameters']);
+        $this->message['response']=$this->response($res,"Users Removed From Group","Failed To Remove Users From Group");
 
         return $this->message;
     }

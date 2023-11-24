@@ -31,8 +31,9 @@ class FileService extends Service{
         }
     }
 
-    public function getFiles(){
-        $files = File::get()->toArray();
+    public function getMyFiles(){
+        $files = File::where('user_id',auth()->user()->id)->get()->toArray();
+
         if(count($files)>0){
 
             return $files;
@@ -46,7 +47,7 @@ class FileService extends Service{
             $files = $bodyParameters['files'];
             foreach($files as $key=>$file){
 
-                $storagePath = $file->store('public/documents');
+                $storagePath = $file->store('public/documents/'.auth()->user()->name);
 
                 $returnFiles[$key] = File::create([
                 'name' => $file->getClientOriginalName(),

@@ -11,14 +11,15 @@ class Group extends GenericModel
 
     public $fillable = [
         'name',
+        'creator_id',
     ];
     public function files()
     {
-        return $this->belongsToMany(File::class, 'group_files','file_id');
+        return $this->belongsToMany(File::class, 'group_files','group_id')->withTimestamps();;
     }
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'group_users','user_id');
+        return $this->belongsToMany(User::class, 'group_users','group_id')->withTimestamps();;
     }
 }

@@ -21,9 +21,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/checkIn/{id}', [TransformerController::class, 'transform'])->name('checkIn');
-    Route::get('/getFiles', [TransformerController::class, 'transform'])->name('getFiles');
+    Route::get('/getMyFiles', [TransformerController::class, 'transform'])->name('getMyFiles');
     Route::post('/uploadFiles', [TransformerController::class, 'transform'])->name('uploadFiles');
     Route::post('/createGroup', [TransformerController::class, 'transform'])->name('createGroup');
+    Route::post('/addFilesToGroup',[TransformerController::class, 'transform'])->name('addFilesToGroup');
+    Route::post('/addUsersToGroup',[TransformerController::class, 'transform'])->name('addUsersToGroup');
+    Route::post('/removeFilesFromGroup',[TransformerController::class, 'transform'])->name('removeFilesFromGroup');
+    Route::post('/removeUsersFromGroup',[TransformerController::class, 'transform'])->name('removeUsersFromGroup');
 });
 
 Route::post('/auth/logIn',[TransformerController::class,'transform'])->name('logIn');
