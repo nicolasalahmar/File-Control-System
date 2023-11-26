@@ -1,0 +1,19 @@
+POST {{host}}/api/auth/logIn
+Content-Type: application/json
+Accept: application/json
+
+{
+    "email": "nicolasalahmar@gmail.com",
+    "password": "12345678"
+}
+
+> {%
+    if(response.body.data.token!=null)
+        client.global.set("user_token", response.body.data.token);
+    if(response.body.refresh_token!=null)
+        client.global.set("refresh_token", response.body.refresh_token);
+    client.test("status code 200", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}
+###

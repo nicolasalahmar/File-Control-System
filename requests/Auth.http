@@ -1,0 +1,48 @@
+# Auth
+
+###
+# @name logIn
+POST http://127.0.0.1:8000/api/auth/logIn
+Accept: application/json
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="email"
+
+nicolasalahmar@gmail.com
+--WebAppBoundary
+Content-Disposition: form-data; name="password"
+
+12345678
+--WebAppBoundary
+
+###
+# @name logOut
+POST http://127.0.0.1:8000/api/auth/logOut
+Accept: application/json
+Authorization: Bearer 2|OhLxucUh6BgPiORpEgl043V8cOwKVDf7OiG9bXzx7ae38886
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+
+--WebAppBoundary
+
+###
+# @name Register
+POST http://127.0.0.1:8000/api/auth/register
+accept: application/json
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="email"
+
+nicolasalahmar@gmail.com
+--WebAppBoundary
+Content-Disposition: form-data; name="password"
+
+12345678
+--WebAppBoundary
+Content-Disposition: form-data; name="name"
+
+nicolas alahmar
+--WebAppBoundary

@@ -1,0 +1,8 @@
+POST {{host}}/api/bulkCheckIn
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{user_token}}
+
+{
+    "file_ids": [1, 2]
+}

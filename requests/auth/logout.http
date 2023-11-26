@@ -1,0 +1,4 @@
+POST {{host}}/api/auth/logOut
+Accept: application/json
+Authorization: Bearer {{user_token}}
+###
