@@ -3,8 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 class File extends GenericModel
 {
@@ -20,6 +19,10 @@ class File extends GenericModel
       'user_id',
     ];
 
+    public $hidden = ['path'];
 
+    public function deleteFileFSDAO(){
+        return Storage::disk('public')->delete($this->path);
+    }
 
 }

@@ -48,8 +48,8 @@ class Facade extends BaseRepository
     }
 
     /************
-        Files
-    **************/
+    Files
+     **************/
 
     public function checkIn(){
         $id =  $this->message['urlParameters']['id'];
@@ -65,6 +65,13 @@ class Facade extends BaseRepository
         return $this->message;
     }
 
+    public function bulkCheckIn(){
+        $id_array =  $this->message['bodyParameters'];
+        $file = $this->fileService->bulkCheckIn($id_array['file_ids']);
+        $this->message['response']=$this->response($file,"Checked In Successfully","Check In Failed");
+        return $this->message;
+    }
+
     public function uploadFiles(){
         $files = $this->fileService->uploadFiles($this->message['bodyParameters']);
         $this->message['response']=$this->response($files,"Files Uploaded successfully","Files Upload Failed");
@@ -72,9 +79,22 @@ class Facade extends BaseRepository
         return $this->message;
     }
 
+    public function removeFiles(){
+        $id_array =  $this->message['bodyParameters'];
+
+        $files = null;
+        $res = $this->fileService->bulkCheckIn($id_array['file_ids']);
+        if ($res != null)
+            $files = $this->fileService->removeFiles($id_array['file_ids']);
+
+        $this->message['response']=$this->response($files,"Files Removed successfully","Files Removal Failed");
+
+        return $this->message;
+    }
+
     /************
-        User Auth
-    **************/
+    User Auth
+     **************/
     public function logIn(){
         $res = $this->userService->logIn($this->message['bodyParameters']);
         $this->message['response']=$this->response($res,"Logged in successfully","Incorrect username or password");
@@ -97,8 +117,8 @@ class Facade extends BaseRepository
     }
 
     /************
-        Group
-    **************/
+    Group
+     **************/
 
     public function createGroup(){
 

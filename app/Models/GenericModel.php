@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
@@ -33,17 +34,31 @@ class GenericModel extends Model
 
         Cache::forget($key);
 
-
         try{
-
             $res = $this->where($customCond)->update($array);
-
             return $res;
         }catch(Exception $e){
             return $e->getMessage();
         }
-
-
     }
 
+    public function deleteObjectDAO(): bool|string|null
+    {
+        self::dropCachesDAO([$this->id]);
+
+        try{
+            $res = $this->delete();
+            return $res;
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
+    }
+
+    public static function dropCachesDAO($id_array){
+        $class=get_called_class();
+        foreach ($id_array as $id){
+            $key = $class.$id;
+            Cache::forget($key);
+        }
+    }
 }
