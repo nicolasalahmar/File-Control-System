@@ -2,14 +2,14 @@
 
 ###
 # @name createGroup
-POST http://127.0.0.1:8000/api/createGroup
-Authorization: Bearer 4|M6JtE0ETxKtaR475PsSVr3ZZtT5f66Z0zUkU7YPI903ab956
+POST {{host}}/api/createGroup
+Authorization: Bearer {{user_token}}
 Content-Type: multipart/form-data; boundary=WebAppBoundary
 
 --WebAppBoundary
 Content-Disposition: form-data; name="name"
 
-Test2
+Test22
 --WebAppBoundary
 
 ###

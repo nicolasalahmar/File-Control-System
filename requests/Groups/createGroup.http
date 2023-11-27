@@ -1,0 +1,8 @@
+POST {{host}}/api/createGroup
+Authorization: Bearer {{user_token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name": "test"
+}

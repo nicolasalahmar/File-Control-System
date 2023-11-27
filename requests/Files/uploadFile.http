@@ -1,0 +1,10 @@
+POST {{host}}/api/uploadFiles
+Authorization: Bearer {{user_token}}
+Accept: application/json
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="files[]"; filename="useful shortcuts.txt"
+
+< C:\Users\Nicol\OneDrive\Desktop\Notepad\useful shortcuts.txt
+--WebAppBoundary

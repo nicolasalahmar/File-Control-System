@@ -1,0 +1,3 @@
+POST {{host}}/api/files/removeFiles
+Authorization: Bearer {{user_token}}
+Content-Type: application/json;
