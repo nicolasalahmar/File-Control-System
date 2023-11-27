@@ -58,6 +58,12 @@ class Facade extends BaseRepository
         return $this->message;
     }
 
+    public function checkOut(){
+        $bodyParameters =  $this->message['bodyParameters'];
+        $file = $this->fileService->checkOut($bodyParameters);
+        $this->message['response']=$this->response($file,"Checked Out Successfully","Check Out Failed");
+        return $this->message;
+    }
     public function getMyFiles(){
         $files = $this->fileService->getFiles();
         $this->message['response']=$this->response($files,"Files Fetched Successfully","No Files Found");
@@ -88,6 +94,15 @@ class Facade extends BaseRepository
             $files = $this->fileService->removeFiles($id_array['file_ids']);
 
         $this->message['response']=$this->response($files,"Files Removed successfully","Files Removal Failed");
+
+        return $this->message;
+    }
+
+
+    public function readFile(){
+        $id =  $this->message['urlParameters']['id'];
+        $res = $this->fileService->readFile($id);
+        $this->message['response']=$this->response($res,"File Read successfully","Failed To Read");
 
         return $this->message;
     }
@@ -153,4 +168,5 @@ class Facade extends BaseRepository
 
         return $this->message;
     }
+
 }

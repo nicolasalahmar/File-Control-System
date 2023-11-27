@@ -18,7 +18,7 @@ class GroupService extends Service{
         if(!$validator->fails()){
             $group = Group::create([
                 'name'=>$bodyParameters['name'],
-                'creator'=>auth()->user()
+                'creator_id'=>auth()->user()->id
             ]);
 
             return $group;

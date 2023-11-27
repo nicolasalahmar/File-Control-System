@@ -120,4 +120,36 @@ class FileService extends Service
             return null;
         }
     }
+
+    public function readFile($id)
+    {
+        $file = File::getObjectDAO($id);
+        return $file;
+    }
+
+    public function checkOut($bodyParameters)
+    {
+        $id = $bodyParameters["id"];
+        $file = File::getObjectDAO($id);
+
+        if(isset($file) && $file->checked == 1){
+            $newFile = $bodyParameters['file'];
+            $storagePath = Storage::disk('public')->put('documents', $newFile);
+            $file->updateObjectDAO([
+                'checked' => 0,
+                'version' => 0,
+                'path' => $storagePath,
+                ],
+                [
+                    'id' => $id,
+                ]);
+            $file->deleteFileFSDAO();
+
+
+            return $file;
+        }else{
+            return null;
+        }
+    }
+
 }
