@@ -2,14 +2,18 @@
 
 namespace App\Models;
 
+use App\Exceptions\CreateObjectException;
 use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Validator;
 
 class GenericModel extends Model
 {
     use HasFactory;
+
+    public $validation_rules=[];
 
     public static function getObjectDAO($id){
 
@@ -59,6 +63,24 @@ class GenericModel extends Model
         foreach ($id_array as $id){
             $key = $class.$id;
             Cache::forget($key);
+        }
+    }
+
+    public static function createObjectDAO($parameters){
+        $class_name=get_called_class();
+        $class = new $class_name();
+        $validation_rules = $class->validation_rules;
+
+        $validator = Validator::make($parameters, $validation_rules);
+
+        if(!$validator->fails()){
+            $obj = $class::create($parameters);
+
+            return $obj;
+
+        }else{
+
+            throw new CreateObjectException($validator->errors()->first());
         }
     }
 }

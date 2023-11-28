@@ -2,10 +2,13 @@
 
 namespace App\Repositories;
 
+use App\Exceptions\CreateObjectException;
 use App\Services\FileService;
 use App\Services\UserService;
 use App\Services\GroupService;
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
+
+
 //use Your Model
 
 /**
@@ -14,16 +17,25 @@ use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 class Facade extends BaseRepository
 {
 
-    private $fileService;
-    private $userService;
-    private $groupService;
+    protected $message;
 
-    private $message;
+    private $facadeMapper = [];
+    protected $userService;
+    protected $fileService;
+    protected $groupService;
+
     public function __construct($message)
     {
-        $this->fileService = new FileService();
         $this->userService = new UserService();
+        $this->fileService = new FileService();
         $this->groupService = new GroupService();
+
+        $this->facadeMapper = [
+            "user"=>"App\\Repositories\\UserFacade",
+            "file"=>"App\\Repositories\\FileFacade",
+            "group"=>"App\\Repositories\\GroupFacade",
+        ];
+
         $this->message = $message;
     }
 
@@ -38,135 +50,50 @@ class Facade extends BaseRepository
 
     public function response($instance,$successMessage,$errorMessage)
     {
+
         return $this->message['response']=
             [
-                "success" => $instance != null,
+                "success" => $instance != null  ,
                 "data" => $instance ?? null,
                 "message" => $instance != null ? $successMessage:$errorMessage,
             ];
 
     }
 
-    /************
-    Files
-     **************/
+    public function exceptionResponse($errorMessage)
+    {
 
-    public function checkIn(){
-        $id =  $this->message['urlParameters']['id'];
-        $file = $this->fileService->checkIn($id);
-        $this->message['response']=$this->response($file,"Checked In Successfully","Check In Failed");
-        return $this->message;
+        return $this->message['response']=
+            [
+                "success" => false ,
+                "message" => $errorMessage,
+            ];
+
     }
 
-    public function checkOut(){
-        $bodyParameters =  $this->message['bodyParameters'];
-        $file = $this->fileService->checkOut($bodyParameters);
-        $this->message['response']=$this->response($file,"Checked Out Successfully","Check Out Failed");
-        return $this->message;
+/*    public function handleException(\Closure $callback)
+    {
+        try {
+            return $callback();
+        } catch (\Exception $e) {
+            $this->message["response"]=$this->exceptionResponse($e->getMessage());
+            return $this->message;
+        }
+    }*/
+
+
+    public function execute(){
+        try{
+
+            $facade = $this->message["facade"];
+            $func = $this->message["function"];
+            $facadeClass= new $this->facadeMapper[$facade]($this->message);
+            $result = $facadeClass->$func();
+            $this->message["response"]=$this->response($result,__("api.".$facade.".".$func.".success"),__("api.".$facade.".".$func.".failure"));
+            return $this->message;
+        }catch(\Exception $e){
+            $this->message["response"]=$this->exceptionResponse($e->getMessage());
+            return $this->message;
+        }
     }
-    public function getMyFiles(){
-        $files = $this->fileService->getFiles();
-        $this->message['response']=$this->response($files,"Files Fetched Successfully","No Files Found");
-
-        return $this->message;
-    }
-
-    public function bulkCheckIn(){
-        $id_array =  $this->message['bodyParameters'];
-        $file = $this->fileService->bulkCheckIn($id_array['file_ids']);
-        $this->message['response']=$this->response($file,"Checked In Successfully","Check In Failed");
-        return $this->message;
-    }
-
-    public function uploadFiles(){
-        $files = $this->fileService->uploadFiles($this->message['bodyParameters']);
-        $this->message['response']=$this->response($files,"Files Uploaded successfully","Files Upload Failed");
-
-        return $this->message;
-    }
-
-    public function removeFiles(){
-        $id_array =  $this->message['bodyParameters'];
-
-        $files = null;
-        $res = $this->fileService->bulkCheckIn($id_array['file_ids']);
-        if ($res != null)
-            $files = $this->fileService->removeFiles($id_array['file_ids']);
-
-        $this->message['response']=$this->response($files,"Files Removed successfully","Files Removal Failed");
-
-        return $this->message;
-    }
-
-
-    public function readFile(){
-        $id =  $this->message['urlParameters']['id'];
-        $res = $this->fileService->readFile($id);
-        $this->message['response']=$this->response($res,"File Read successfully","Failed To Read");
-
-        return $this->message;
-    }
-
-    /************
-    User Auth
-     **************/
-    public function logIn(){
-        $res = $this->userService->logIn($this->message['bodyParameters']);
-        $this->message['response']=$this->response($res,"Logged in successfully","Incorrect username or password");
-
-        return $this->message;
-    }
-
-    public function register(){
-        $res = $this->userService->register($this->message['bodyParameters']);
-        $this->message['response']=$this->response($res,"Created user successfully","Error creating user");
-
-        return $this->message;
-    }
-
-    public function logOut(){
-        $res = $this->userService->logOut($this->message['bodyParameters']);
-        $this->message['response']=$this->response($res,"Logged out user successfully","Error logging out user");
-
-        return $this->message;
-    }
-
-    /************
-    Group
-     **************/
-
-    public function createGroup(){
-
-        $group = $this->groupService->createGroup($this->message['bodyParameters']);
-        $this->message['response']=$this->response($group,"Group created successfully","Failed To Create Group");
-
-        return $this->message;
-    }
-
-    public function addFilesToGroup(){
-        $res = $this->groupService->manageElementsInGroup("file","attach",$this->message['bodyParameters']);
-        $this->message['response']=$this->response($res,"Files Added To Group","Failed To Add Files To Group");
-
-        return $this->message;
-    }
-    public function addUsersToGroup(){
-        $res = $this->groupService->manageElementsInGroup("user","attach",$this->message['bodyParameters']);
-        $this->message['response']=$this->response($res,"Users Added To Group","Failed To Add Users To Group");
-
-        return $this->message;
-    }
-    public function removeFilesFromGroup(){
-        $res = $this->groupService->manageElementsInGroup("file","detach",$this->message['bodyParameters']);
-        $this->message['response']=$this->response($res,"Files Removed From Group","Failed To Remove Files From Group");
-
-
-        return $this->message;
-    }
-    public function removeUsersFromGroup(){
-        $res = $this->groupService->manageElementsInGroup("user","detach",$this->message['bodyParameters']);
-        $this->message['response']=$this->response($res,"Users Removed From Group","Failed To Remove Users From Group");
-
-        return $this->message;
-    }
-
 }

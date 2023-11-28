@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\ProcessFileJob;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Route;
 use App\Repositories\Facade;
 
@@ -20,7 +18,8 @@ class TransformerController extends Controller
 
         $message = [];
 
-        $message['function']=$routeName;
+        $message = $this->getRouteExploded($message,$routeName);
+
         $message['method']=$method;
         $message['request']=$request;
 
@@ -41,11 +40,24 @@ class TransformerController extends Controller
             }
         }
 
-        $func = $message['function'];
         $facade = new Facade($message);
-        $result = $facade->$func($message);
+        $result = $facade->execute();
 
         return response()->json($result['response']);
+    }
+
+    public function getRouteExploded($message,$routeName){
+
+            $exp_arr=explode(".",$routeName);
+            if(isset($exp_arr) && count($exp_arr)==2){
+                $message["facade"]=$exp_arr[0];
+                $message["function"]=$exp_arr[1];
+                return $message;
+            }else{
+                return null;
+            }
+
+
     }
 
 }

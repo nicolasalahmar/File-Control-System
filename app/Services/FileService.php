@@ -76,7 +76,7 @@ class FileService extends Service
 
                 $storagePath = Storage::disk('public')->put('documents', $file);
 
-                $returnFiles[$key] = File::create([
+                $parameters = [
                     'name' => $file->getClientOriginalName(),
                     'path' => $storagePath,
                     'mime_type' => $file->extension(),
@@ -84,7 +84,9 @@ class FileService extends Service
                     'checked' => '0',
                     'version' => '0',
                     'user_id' => auth()->user()->id,
-                ]);
+                ];
+
+                $returnFiles[$key] = File::createObjectDAO($parameters);
             }
 
             return $returnFiles;

@@ -13,13 +13,17 @@ class Group extends GenericModel
         'name',
         'creator_id',
     ];
+
+    public $validation_rules = [
+        'name'=>'unique:groups,name',
+    ];
     public function files()
     {
-        return $this->belongsToMany(File::class, 'group_files','group_id')->withTimestamps();;
+        return $this->belongsToMany(File::class, 'group_files','group_id')->withTimestamps();
     }
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'group_users','group_id')->withTimestamps();;
+        return $this->belongsToMany(User::class, 'group_users','group_id')->withTimestamps();
     }
 }

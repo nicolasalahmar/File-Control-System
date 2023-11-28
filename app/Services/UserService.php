@@ -2,11 +2,8 @@
 
 namespace App\Services;
 
-use App\Jobs\ProcessFileJob;
-use App\Models\File;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
 
 class UserService extends Service{
@@ -41,17 +38,14 @@ class UserService extends Service{
     }
     public function register($bodyParameters)
     {
-        $data = Validator::make($bodyParameters, [
-            'name' => 'required|string',
-            'email' => 'required|string|unique:users,email',
-            'password' => 'required|string'
-        ])->validated();
 
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password'])
-        ]);
+        $parameters = [
+            'name' => $bodyParameters['name'],
+            'email' => $bodyParameters['email'],
+            'password' => bcrypt($bodyParameters['password'])
+        ];
+
+        $user = User::createObjectDAO($parameters);
 
         return $user;
     }

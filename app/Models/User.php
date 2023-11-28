@@ -3,9 +3,11 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Exceptions\CreateObjectException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Validator;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -43,4 +45,26 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public $validation_rules = [
+        'name' => 'required|string',
+        'email' => 'required|string|unique:users,email',
+        'password' => 'required|string'
+    ];
+
+    public static function createObjectDAO($parameters){
+        $class_name=get_called_class();
+        $class = new $class_name();
+        $validation_rules = $class->validation_rules;
+
+        $validator = Validator::make($parameters, $validation_rules);
+
+        if(!$validator->fails()){
+            $obj = $class::create($parameters);
+
+            return $obj;
+        }else{
+            throw new CreateObjectException($validator->errors()->first());
+        }
+    }
 }

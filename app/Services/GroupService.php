@@ -2,29 +2,20 @@
 
 namespace App\Services;
 
-use App\Models\File;
 use App\Models\Group;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Redis;
-use Illuminate\Support\Facades\Storage;
 
 class GroupService extends Service{
     public function createGroup($bodyParameters){
 
-        $validator = Validator::make($bodyParameters, [
-            'name'=>'unique:groups,name',
-        ]);
+        $parameters = [
+            'name'=>$bodyParameters['name'],
+            'creator_id'=>auth()->user()->id
+        ];
 
-        if(!$validator->fails()){
-            $group = Group::create([
-                'name'=>$bodyParameters['name'],
-                'creator_id'=>auth()->user()->id
-            ]);
+        $group = Group::createObjectDAO($parameters);
 
-            return $group;
-        }else{
-            return null;
-        }
+        return $group;
+
     }
 
     public function manageElementsInGroup($element_type,$op_type,$bodyParameters){

@@ -20,20 +20,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/checkIn/{id}', [TransformerController::class, 'transform'])->name('checkIn');
-    Route::post('/checkOut', [TransformerController::class, 'transform'])->name('checkOut');
-    Route::get('/getMyFiles', [TransformerController::class, 'transform'])->name('getMyFiles');
-    Route::post('/bulkCheckIn', [TransformerController::class, 'transform'])->name('bulkCheckIn');
-    Route::post('/uploadFiles', [TransformerController::class, 'transform'])->name('uploadFiles');
-    Route::post('/files/removeFiles', [TransformerController::class, 'transform'])->name('removeFiles');
-    Route::post('/createGroup', [TransformerController::class, 'transform'])->name('createGroup');
-    Route::post('/addFilesToGroup',[TransformerController::class, 'transform'])->name('addFilesToGroup');
-    Route::post('/addUsersToGroup',[TransformerController::class, 'transform'])->name('addUsersToGroup');
-    Route::post('/removeFilesFromGroup',[TransformerController::class, 'transform'])->name('removeFilesFromGroup');
-    Route::post('/removeUsersFromGroup',[TransformerController::class, 'transform'])->name('removeUsersFromGroup');
-    Route::get('/readFile/{id}',[TransformerController::class, 'transform'])->name('readFile');
+    Route::get('/checkIn/{id}', [TransformerController::class, 'transform'])->name('file.checkIn');
+    Route::post('/checkOut', [TransformerController::class, 'transform'])->name('file.checkOut');
+    Route::get('/getMyFiles', [TransformerController::class, 'transform'])->name('file.getMyFiles');
+    Route::post('/bulkCheckIn', [TransformerController::class, 'transform'])->name('file.bulkCheckIn');
+    Route::post('/uploadFiles', [TransformerController::class, 'transform'])->name('file.uploadFiles');
+    Route::post('/files/removeFiles', [TransformerController::class, 'transform'])->name('file.removeFiles');
+    Route::post('/createGroup', [TransformerController::class, 'transform'])->name('group.createGroup');
+    Route::post('/addFilesToGroup',[TransformerController::class, 'transform'])->name('group.addFilesToGroup');
+    Route::post('/addUsersToGroup',[TransformerController::class, 'transform'])->name('group.addUsersToGroup');
+    Route::post('/removeFilesFromGroup',[TransformerController::class, 'transform'])->name('group.removeFilesFromGroup');
+    Route::post('/removeUsersFromGroup',[TransformerController::class, 'transform'])->name('group.removeUsersFromGroup');
+    Route::get('/readFile/{id}',[TransformerController::class, 'transform'])->name('file.readFile');
 });
 
-Route::post('/auth/logIn',[TransformerController::class,'transform'])->name('logIn');
-Route::post('/auth/logOut',[TransformerController::class,'transform'])->middleware(['auth:sanctum'])->name('logOut');
-Route::post('/auth/register',[TransformerController::class,'transform'])->name('register');
+Route::post('/auth/logIn',[TransformerController::class,'transform'])->name('user.logIn');
+Route::post('/auth/logOut',[TransformerController::class,'transform'])->middleware(['auth:sanctum'])->name('user.logOut');
+Route::post('/auth/register',[TransformerController::class,'transform'])->name('user.register');
