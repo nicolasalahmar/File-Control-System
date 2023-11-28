@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Exceptions\CheckInException;
 use App\Exceptions\fileDeletionException;
+use App\Exceptions\FileInUseException;
 use App\Models\File;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -14,11 +15,8 @@ class FileService extends Service
 
     public function checkIn($id)
     {
-
         $file = File::getObjectDAO($id);
-
         if ($file->checked == 0) {
-
             $file->updateObjectDAO([
                 'checked' => 1,
                 'version' => $file->version + 1
@@ -30,15 +28,15 @@ class FileService extends Service
 
             return $file;
         } else {
-
-            return null;
+            throw new FileInUseException('File is in use by someone else');
         }
     }
 
-    public function getMyFiles(){
-        $files = File::where('user_id',auth()->user()->id)->get()->toArray();
+    public function getMyFiles()
+    {
+        $files = File::where('user_id', auth()->user()->id)->get()->toArray();   //todo this should be DAO
 
-        if(count($files)>0){
+        if (count($files) > 0) {
 
             return $files;
         } else {
@@ -54,14 +52,10 @@ class FileService extends Service
         try {
             foreach ($id_array as $id) {
                 $file = $this->checkIn($id);
-                if ($file) {
-                    array_push($files, $file);
-                } else {
-                    throw new CheckInException('Error checking in');
-                }
+                array_push($files, $file);
             }
             DB::commit();
-        } catch (Exception $e) {
+        } catch (Exception $e) {    //todo remember to remove this try catch on AOP
             $files = null;
             DB::rollBack();
         }
@@ -74,7 +68,7 @@ class FileService extends Service
             $files = $bodyParameters['files'];
             foreach ($files as $key => $file) {
 
-                $storagePath = Storage::disk('public')->put('documents', $file);
+                $storagePath = Storage::disk('public')->put('documents', $file);    //todo this should be DAO
 
                 $parameters = [
                     'name' => $file->getClientOriginalName(),
@@ -134,22 +128,21 @@ class FileService extends Service
         $id = $bodyParameters["id"];
         $file = File::getObjectDAO($id);
 
-        if(isset($file) && $file->checked == 1){
+        if (isset($file) && $file->checked == 1) {
             $newFile = $bodyParameters['file'];
             $storagePath = Storage::disk('public')->put('documents', $newFile);
             $file->updateObjectDAO([
                 'checked' => 0,
                 'version' => 0,
                 'path' => $storagePath,
-                ],
+            ],
                 [
                     'id' => $id,
                 ]);
             $file->deleteFileFSDAO();
 
-
             return $file;
-        }else{
+        } else {
             return null;
         }
     }

@@ -2,13 +2,18 @@
 
 namespace App\Services;
 
+use App\Exceptions\CreateObjectException;
+use App\Exceptions\loginError;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class UserService extends Service{
 
-    public function logIn($bodyParameters)
+    /**
+     * @throws loginError
+     */
+    public function logIn($bodyParameters): array
     {
         $data = Validator::make($bodyParameters, [
             'email' => 'required|email',
@@ -18,24 +23,25 @@ class UserService extends Service{
         $user = User::where('email', $data['email'])->first();
 
         if (!$user || !Hash::check($data['password'], $user->password)) {
-
-            return null;
+            throw new loginError("User doesn't exists or credentials are wrong");
         }
 
         $token = $user->createToken('apiToken')->plainTextToken;
 
-        $res = [
+        return [
             'user' => $user,
             'token' => $token
         ];
-
-        return $res;
     }
-    public function logOut()
+    public function logOut(): bool
     {
-        $res = auth()->user()->tokens()->delete();
+        auth()->user()->tokens()->delete();
         return true;
     }
+
+    /**
+     * @throws CreateObjectException
+     */
     public function register($bodyParameters)
     {
 
@@ -45,8 +51,6 @@ class UserService extends Service{
             'password' => bcrypt($bodyParameters['password'])
         ];
 
-        $user = User::createObjectDAO($parameters);
-
-        return $user;
+        return User::createObjectDAO($parameters);
     }
 }

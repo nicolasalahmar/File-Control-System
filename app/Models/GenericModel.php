@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Exceptions\CreateObjectException;
-use Exception;
+use App\Exceptions\ObjectNotFoundException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
@@ -24,7 +24,11 @@ class GenericModel extends Model
 
         if($object==null) {
             $object = self::find($id);
-            Cache::add($key,$object,env('CACHE_EXPIRY'));
+            if ($object == null){
+                throw new ObjectNotFoundException($class.' object not found');
+            }else{
+                Cache::add($key,$object,env('CACHE_EXPIRY'));
+            }
         }
         return $object;
     }
@@ -38,24 +42,23 @@ class GenericModel extends Model
 
         Cache::forget($key);
 
-        try{
-            $res = $this->where($customCond)->update($array);
-            return $res;
-        }catch(Exception $e){
-            return $e->getMessage();
+        $res = $this->where($customCond)->update($array);
+        if ($res < 1){
+            throw new ObjectNotFoundException($class.' object not found');
         }
+        return $res;
     }
 
-    public function deleteObjectDAO(): bool|string|null
+    public function deleteObjectDAO()
     {
         self::dropCachesDAO([$this->id]);
 
-        try{
-            $res = $this->delete();
-            return $res;
-        }catch(Exception $e){
-            return $e->getMessage();
+        $res = $this->delete();
+
+        if ($res < 1){
+            throw new ObjectNotFoundException(get_called_class().' object not found');
         }
+        return $res;
     }
 
     public static function dropCachesDAO($id_array){
@@ -77,9 +80,7 @@ class GenericModel extends Model
             $obj = $class::create($parameters);
 
             return $obj;
-
         }else{
-
             throw new CreateObjectException($validator->errors()->first());
         }
     }
