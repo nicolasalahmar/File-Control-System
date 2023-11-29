@@ -24,7 +24,9 @@ return new class extends Migration
 
         Schema::table('files', function($table) {
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('file_holder_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('file_holder_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -6,6 +6,7 @@ use App\Exceptions\CheckInException;
 use App\Exceptions\fileDeletionException;
 use App\Exceptions\FileInUseException;
 use App\Models\File;
+use App\Models\Group;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -19,7 +20,8 @@ class FileService extends Service
         if ($file->checked == 0) {
             $file->updateObjectDAO([
                 'checked' => 1,
-                'version' => $file->version + 1
+                'version' => $file->version + 1,
+                'file_holder_id'=>auth()->user()->id
             ],
                 [
                     'id' => $id,
@@ -56,21 +58,22 @@ class FileService extends Service
         $id = $bodyParameters["id"];
         $file = File::getObjectDAO($id);
 
-        if (isset($file) && $file->checked == 1) {
+        if(isset($file) && $file->checked == 1 && $file->file_holder_id == auth()->user()->id){
             $newFile = $bodyParameters['file'];
             $storagePath = Storage::disk('public')->put('documents', $newFile);
+            $file->deleteFileFSDAO();
+
             $file->updateObjectDAO([
                 'checked' => 0,
                 'version' => 0,
                 'path' => $storagePath,
+                'file_holder_id'=>null
             ],
                 [
                     'id' => $id,
                 ]);
-            $file->deleteFileFSDAO();
-
             return $file;
-        } else {
+        }else{
             return null;
         }
     }
