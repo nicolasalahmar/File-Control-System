@@ -52,6 +52,11 @@ class User extends Authenticatable
         'password' => 'required|string'
     ];
 
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class, 'group_users','user_id')->withTimestamps();
+    }
+
     public static function createObjectDAO($parameters){
         $class_name=get_called_class();
         $class = new $class_name();

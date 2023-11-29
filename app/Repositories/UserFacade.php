@@ -29,4 +29,9 @@ class UserFacade extends Facade
         return $res;
     }
 
+    public function allUsers(){
+        $res = $this->userService->allUsers();
+        return $res;
+    }
+
 }

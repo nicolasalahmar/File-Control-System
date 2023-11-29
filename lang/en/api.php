@@ -12,6 +12,12 @@ return array(
             ),"MyGroups"=>array(
                 "success"=>"Groups fetched successfully",
                 "failure"=>"Failed to fetch groups",
+            ),"enrolledGroups"=>array(
+                "success"=>"Enrolled groups fetched successfully",
+                "failure"=>"Failed to fetch enrolled groups",
+            ),"filesInGroup"=>array(
+                "success"=>"Files in group fetched successfully",
+                "failure"=>"Failed to fetch files in group",
             ),
             "addFilesToGroup"=>array(
                 "success"=>"Files Added To Group",
@@ -34,6 +40,9 @@ return array(
             "logIn"=>array(
                 "success"=>"Logged in successfully",
                 "failure"=>"Incorrect username or password",
+            ),"allUsers"=>array(
+                "success"=>"Fetched all users successfully",
+                "failure"=>"Error fetching all users",
             ),
             "register"=>array(
                 "success"=>"Incorrect username or password",

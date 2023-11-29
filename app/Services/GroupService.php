@@ -108,7 +108,12 @@ class GroupService extends Service{
         return $group->deleteObjectDAO();
     }
 
-    public function MyGroups($id){
+    public function userGroups($id){
         return Group::where('creator_id', $id)->get();
+    }
+
+    public function groupsUserEnrolledIn($user)
+    {
+        return $user->groups()->get();
     }
 }

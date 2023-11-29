@@ -4,6 +4,6 @@ Content-Type: application/json;
 Accept: application/json
 
 {
-    "group_id": 12,
+    "group_id": 13,
     "files_ids": [1, 2]
 }

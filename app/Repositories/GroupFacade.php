@@ -47,6 +47,14 @@ class GroupFacade extends Facade
         return $res??null;
     }
     public function myGroups(){
-        return $this->groupService->MyGroups(auth()->user()->id);
+        return $this->groupService->userGroups(auth()->user()->id);
+    }
+    public function enrolledGroups(){
+        return $this->groupService->groupsUserEnrolledIn(auth()->user());
+    }
+
+    public function filesInGroup(){
+        $id = $this->message['urlParameters']['id'];
+        return $this->groupService->getGroupFiles($id);
     }
 }

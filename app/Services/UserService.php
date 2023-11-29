@@ -53,4 +53,9 @@ class UserService extends Service{
 
         return User::createObjectDAO($parameters);
     }
+
+    public function allUsers()
+    {
+        return User::all();
+    }
 }
