@@ -42,7 +42,7 @@ class GenericModel extends Model
 
         Cache::forget($key);
 
-        $res = $this->where($customCond)->update($array);
+        $res = $this->where($customCond + ['id'=>$this->id])->update($array);
         if ($res < 1){
             throw new ObjectNotFoundException($class.' object not found');
         }

@@ -32,17 +32,6 @@ class FileService extends Service
         }
     }
 
-    public function getMyFiles()
-    {
-        $files = File::where('user_id', auth()->user()->id)->get()->toArray();   //todo this should be DAO
-
-        if (count($files) > 0) {
-
-            return $files;
-        } else {
-            return null;
-        }
-    }
 
     public function bulkCheckIn($id_array)
     {
@@ -60,6 +49,49 @@ class FileService extends Service
             DB::rollBack();
         }
         return $files;
+    }
+
+    public function checkOut($bodyParameters)
+    {
+        $id = $bodyParameters["id"];
+        $file = File::getObjectDAO($id);
+
+        if (isset($file) && $file->checked == 1) {
+            $newFile = $bodyParameters['file'];
+            $storagePath = Storage::disk('public')->put('documents', $newFile);
+            $file->updateObjectDAO([
+                'checked' => 0,
+                'version' => 0,
+                'path' => $storagePath,
+            ],
+                [
+                    'id' => $id,
+                ]);
+            $file->deleteFileFSDAO();
+
+            return $file;
+        } else {
+            return null;
+        }
+    }
+
+    public function freeFiles($files){
+        $res = [];
+        foreach($files as $file){
+            $r = $file->updateObjectDAO(['checked' => 0, 'version' => 0], []);
+            array_push($res, $r);
+        }
+        return !in_array(null, $res);
+    }
+
+    public function getMyFiles()
+    {
+        $files = File::where('user_id', auth()->user()->id)->get()->toArray();   //todo this should be DAO
+        if (count($files) > 0) {
+            return $files;
+        } else {
+            return null;
+        }
     }
 
     public function uploadFiles($bodyParameters)
@@ -121,30 +153,6 @@ class FileService extends Service
     {
         $file = File::getObjectDAO($id);
         return $file;
-    }
-
-    public function checkOut($bodyParameters)
-    {
-        $id = $bodyParameters["id"];
-        $file = File::getObjectDAO($id);
-
-        if (isset($file) && $file->checked == 1) {
-            $newFile = $bodyParameters['file'];
-            $storagePath = Storage::disk('public')->put('documents', $newFile);
-            $file->updateObjectDAO([
-                'checked' => 0,
-                'version' => 0,
-                'path' => $storagePath,
-            ],
-                [
-                    'id' => $id,
-                ]);
-            $file->deleteFileFSDAO();
-
-            return $file;
-        } else {
-            return null;
-        }
     }
 
 }

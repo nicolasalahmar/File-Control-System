@@ -6,6 +6,12 @@ return array(
             "createGroup"=>array(
                 "success"=>"Group created successfully",
                 "failure"=>"Failed To Create Group",
+            ),"removeGroup"=>array(
+                "success"=>"Group removed successfully",
+                "failure"=>"Failed To remove Group",
+            ),"MyGroups"=>array(
+                "success"=>"Groups fetched successfully",
+                "failure"=>"Failed to fetch groups",
             ),
             "addFilesToGroup"=>array(
                 "success"=>"Files Added To Group",

@@ -38,4 +38,18 @@ class GroupService extends Service{
         }
         return true;
     }
+
+    public function getGroupFiles($id){
+        $group = Group::getObjectDAO($id);
+        return $group->files()->get();
+    }
+
+    public function removeGroup($id){
+        $group = Group::find($id);
+        return $group->deleteObjectDAO();
+    }
+
+    public function MyGroups($id){
+        return Group::where('creator_id', $id)->get();
+    }
 }

@@ -19,7 +19,6 @@ class GroupFacade extends Facade
             $group = $this->groupService->createGroup($this->message['bodyParameters']);
             return $group;
     }
-
     public function addFilesToGroup(){
         $res = $this->groupService->manageElementsInGroup("file","attach",$this->message['bodyParameters']);
         return $res;
@@ -36,5 +35,17 @@ class GroupFacade extends Facade
         $res = $this->groupService->manageElementsInGroup("user","detach",$this->message['bodyParameters']);
         return $res;
     }
-
+    public function removeGroup(){
+        $id = $this->message['urlParameters']['id'];
+        $files = $this->groupService->getGroupFiles($id);
+        $check = $this->fileService->bulkCheckIn($files->pluck('id')->toArray());
+        if ($check != null){
+            $res = $this->groupService->removeGroup($id);
+            $this->fileService->freeFiles($files);
+        }
+        return $res??null;
+    }
+    public function myGroups(){
+        return $this->groupService->MyGroups(auth()->user()->id);
+    }
 }
