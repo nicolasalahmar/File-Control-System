@@ -32,7 +32,7 @@ class GroupFacade extends Facade
         return $res;
     }
     public function removeUsersFromGroup(){
-        $groupFiles = $this->fileService->getGroupFiles($this->message["bodyParameters"]);
+        $groupFiles = $this->groupService->getGroupFiles($this->message["bodyParameters"]["group_id"]);
         $res = $this->groupService->removeUsersFromGroup($this->message['bodyParameters'],$groupFiles);
         return $res;
     }

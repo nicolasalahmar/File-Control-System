@@ -45,7 +45,7 @@ return array(
                 "failure"=>"Error fetching all users",
             ),
             "register"=>array(
-                "success"=>"Incorrect username or password",
+                "success"=>"User Created Successfully",
                 "failure"=>"Error creating user",
             ),
             "logOut"=>array(

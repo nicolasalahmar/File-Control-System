@@ -34,9 +34,7 @@ class GroupService extends Service{
         $ids_arr = preg_split ("/\,/", $ids);
 
         if($this->checkFilesOwnership($ids_arr)){
-            foreach($ids_arr as $id){
-                $group->files()->attach($id);
-            }
+            $group->files()->syncWithoutDetaching($ids_arr);
             return true;
         }else{
             return null;
@@ -47,10 +45,8 @@ class GroupService extends Service{
         $group = Group::getObjectDAO($bodyParameters['group_id']);
         $ids = $bodyParameters['users_ids'][0];
         $ids_arr = preg_split ("/\,/", $ids);
+        $group->users()->syncWithoutDetaching($ids_arr);
 
-        foreach($ids_arr as $id){
-            $group->users()->attach($id);
-        }
         return true;
     }
     public function removeFilesFromGroup($bodyParameters){
