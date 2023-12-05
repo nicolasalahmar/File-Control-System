@@ -7,6 +7,9 @@ use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 
 class FileFacade extends Facade
 {
+    CONST aspects_map = array(
+        'getMyFiles'=>array('LoggingAspect','TransactionAspect')
+    );
     public function __construct($message)
     {
         parent::__construct($message);

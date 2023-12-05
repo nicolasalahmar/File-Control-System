@@ -7,7 +7,9 @@ use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 
 class UserFacade extends Facade
 {
+    CONST aspects_map = array(
 
+    );
     public function __construct($message)
     {
         parent::__construct($message);

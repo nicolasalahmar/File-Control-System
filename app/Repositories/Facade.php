@@ -23,6 +23,7 @@ class Facade extends BaseRepository
     protected $userService;
     protected $fileService;
     protected $groupService;
+    protected $aspects_map = [];
 
     public function __construct($message)
     {
@@ -83,17 +84,55 @@ class Facade extends BaseRepository
 
 
     public function execute(){
+        $facade = $this->message["facade"];
+        $func = $this->message["function"];
+        $facadeClass= new $this->facadeMapper[$facade]($this->message);
         try{
 
-            $facade = $this->message["facade"];
-            $func = $this->message["function"];
-            $facadeClass= new $this->facadeMapper[$facade]($this->message);
+            $this->executeBefore($func, $facadeClass);
+
             $result = $facadeClass->$func();
             $this->message["response"]=$this->response($result,__("api.".$facade.".".$func.".success"),__("api.".$facade.".".$func.".failure"));
+
+            $this->executeAfter($func, $facadeClass);
+
             return $this->message;
         }catch(\Exception $e){
+            $this->executeException($func,$facadeClass);
             $this->message["response"]=$this->exceptionResponse($e->getMessage());
             return $this->message;
         }
+    }
+
+    public function executeBefore($func,$facadeClass){
+        $aspects = $facadeClass::aspects_map[$func];
+
+        foreach ($aspects as $aspect){
+            $obj = "App\\Aspects\\".$aspect;
+            $class = new $obj($this->message);
+            $class->before();
+        }
+
+    }
+    public function executeAfter($func,$facadeClass){
+
+        $aspects = $facadeClass::aspects_map[$func];
+        foreach ($aspects as $aspect){
+            $obj = "App\\Aspects\\".$aspect;
+            $class = new $obj($this->message);
+            $class->after();
+        }
+
+    }
+
+    public function executeException($func,$facadeClass){
+
+        $aspects = $facadeClass::aspects_map[$func];
+        foreach ($aspects as $aspect){
+            $obj = "App\\Aspects\\".$aspect;
+            $class = new $obj($this->message);
+            $class->exception();
+        }
+
     }
 }

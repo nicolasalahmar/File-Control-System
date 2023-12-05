@@ -38,17 +38,17 @@ class FileService extends Service
     public function bulkCheckIn($id_array)
     {
         $files = [];
-        DB::beginTransaction();
+
 
         try {
             foreach ($id_array as $id) {
                 $file = $this->checkIn($id);
                 array_push($files, $file);
             }
-            DB::commit();
+
         } catch (Exception $e) {    //todo remember to remove this try catch on AOP
             $files = null;
-            DB::rollBack();
+
         }
         return $files;
     }
