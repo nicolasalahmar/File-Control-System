@@ -32,9 +32,9 @@ class Facade extends BaseRepository
         $this->groupService = new GroupService();
 
         $this->facadeMapper = [
-            "user"=>"App\\Repositories\\UserFacade",
-            "file"=>"App\\Repositories\\FileFacade",
-            "group"=>"App\\Repositories\\GroupFacade",
+            "user" => "App\\Repositories\\UserFacade",
+            "file" => "App\\Repositories\\FileFacade",
+            "group" => "App\\Repositories\\GroupFacade",
         ];
 
         $this->message = $message;
@@ -49,14 +49,14 @@ class Facade extends BaseRepository
         return \App\Models\GenericModel::class;
     }
 
-    public function response($instance,$successMessage,$errorMessage)
+    public function response($instance, $successMessage, $errorMessage)
     {
 
-        return $this->message['response']=
+        return $this->message['response'] =
             [
-                "success" => $instance != null  ,
+                "success" => $instance != null,
                 "data" => $instance ?? null,
-                "message" => $instance != null ? $successMessage:$errorMessage,
+                "message" => $instance != null ? $successMessage : $errorMessage,
             ];
 
     }
@@ -64,75 +64,81 @@ class Facade extends BaseRepository
     public function exceptionResponse($errorMessage)
     {
 
-        return $this->message['response']=
+        return $this->message['response'] =
             [
-                "success" => false ,
+                "success" => false,
                 "message" => $errorMessage,
             ];
 
     }
 
-/*    public function handleException(\Closure $callback)
+    /*    public function handleException(\Closure $callback)
+        {
+            try {
+                return $callback();
+            } catch (\Exception $e) {
+                $this->message["response"]=$this->exceptionResponse($e->getMessage());
+                return $this->message;
+            }
+        }*/
+
+
+    public function execute()
     {
-        try {
-            return $callback();
-        } catch (\Exception $e) {
-            $this->message["response"]=$this->exceptionResponse($e->getMessage());
-            return $this->message;
-        }
-    }*/
-
-
-    public function execute(){
         $facade = $this->message["facade"];
         $func = $this->message["function"];
-        $facadeClass= new $this->facadeMapper[$facade]($this->message);
-        try{
+        $facadeClass = new $this->facadeMapper[$facade]($this->message);
+        try {
 
             $this->executeBefore($func, $facadeClass);
 
             $result = $facadeClass->$func();
-            $this->message["response"]=$this->response($result,__("api.".$facade.".".$func.".success"),__("api.".$facade.".".$func.".failure"));
+            $this->message["response"] = $this->response($result, __("api." . $facade . "." . $func . ".success"), __("api." . $facade . "." . $func . ".failure"));
 
             $this->executeAfter($func, $facadeClass);
 
             return $this->message;
-        }catch(\Exception $e){
-            $this->executeException($func,$facadeClass);
-            $this->message["response"]=$this->exceptionResponse($e->getMessage());
+        } catch (\Exception $e) {
+            $this->executeException($func, $facadeClass);
+            $this->message["response"] = $this->exceptionResponse($e->getMessage());
             return $this->message;
         }
     }
 
-    public function executeBefore($func,$facadeClass){
-        $aspects = $facadeClass::aspects_map[$func];
-
-        foreach ($aspects as $aspect){
-            $obj = "App\\Aspects\\".$aspect;
-            $class = new $obj($this->message);
-            $class->before();
+    public function executeBefore($func, $facadeClass)
+    {
+        $aspects = $facadeClass::aspects_map[$func] ?? null;
+        if ($aspects) {
+            foreach ($aspects as $aspect) {
+                $obj = "App\\Aspects\\" . $aspect;
+                $class = new $obj($this->message);
+                $class->before();
+            }
         }
-
-    }
-    public function executeAfter($func,$facadeClass){
-
-        $aspects = $facadeClass::aspects_map[$func];
-        foreach ($aspects as $aspect){
-            $obj = "App\\Aspects\\".$aspect;
-            $class = new $obj($this->message);
-            $class->after();
-        }
-
     }
 
-    public function executeException($func,$facadeClass){
-
-        $aspects = $facadeClass::aspects_map[$func];
-        foreach ($aspects as $aspect){
-            $obj = "App\\Aspects\\".$aspect;
-            $class = new $obj($this->message);
-            $class->exception();
+    public function executeAfter($func, $facadeClass)
+    {
+        $aspects = $facadeClass::aspects_map[$func] ?? null;
+        if ($aspects) {
+            foreach ($aspects as $aspect) {
+                $obj = "App\\Aspects\\" . $aspect;
+                $class = new $obj($this->message);
+                $class->after();
+            }
         }
+    }
 
+    public function executeException($func, $facadeClass)
+    {
+
+        $aspects = $facadeClass::aspects_map[$func] ?? null;
+        if ($aspects) {
+            foreach ($aspects as $aspect) {
+                $obj = "App\\Aspects\\" . $aspect;
+                $class = new $obj($this->message);
+                $class->exception();
+            }
+        }
     }
 }

@@ -6,6 +6,20 @@ use App\Models\File;
 use App\Models\Group;
 
 class GroupService extends Service{
+    CONST aspects_map = array(
+        'createGroup'=>array('TransactionAspect', 'LoggingAspect'),
+        'checkFilesOwnership'=>array('TransactionAspect', 'LoggingAspect'),
+        'addFilesToGroup'=>array('TransactionAspect', 'LoggingAspect'),
+        'addUsersToGroup'=>array('TransactionAspect', 'LoggingAspect'),
+        'removeFilesFromGroup'=>array('TransactionAspect', 'LoggingAspect'),
+        'removeUsersFromGroup'=>array('TransactionAspect', 'LoggingAspect'),
+        'checkUsersCheckedFilesInGroup'=>array('TransactionAspect', 'LoggingAspect'),
+        'getGroupFiles'=>array('TransactionAspect', 'LoggingAspect'),
+        'removeGroup'=>array('TransactionAspect', 'LoggingAspect'),
+        'userGroups'=>array('TransactionAspect', 'LoggingAspect'),
+        'groupsUserEnrolledIn'=>array('TransactionAspect', 'LoggingAspect'),
+    );
+
     public function createGroup($bodyParameters){
 
         $parameters = [

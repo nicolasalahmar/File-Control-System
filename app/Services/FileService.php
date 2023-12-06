@@ -21,7 +21,7 @@ class FileService extends Service
             $file->updateObjectDAO([
                 'checked' => 1,
                 'version' => $file->version + 1,
-                'file_holder_id'=>auth()->user()->id
+                'file_holder_id' => auth()->user()->id
             ],
                 [
                     'id' => $id,
@@ -38,17 +38,9 @@ class FileService extends Service
     public function bulkCheckIn($id_array)
     {
         $files = [];
-
-
-        try {
-            foreach ($id_array as $id) {
-                $file = $this->checkIn($id);
-                array_push($files, $file);
-            }
-
-        } catch (Exception $e) {    //todo remember to remove this try catch on AOP
-            $files = null;
-
+        foreach ($id_array as $id) {
+            $file = $this->checkIn($id);
+            array_push($files, $file);
         }
         return $files;
     }
@@ -58,7 +50,7 @@ class FileService extends Service
         $id = $bodyParameters["id"];
         $file = File::getObjectDAO($id);
 
-        if(isset($file) && $file->checked == 1 && $file->file_holder_id == auth()->user()->id){
+        if (isset($file) && $file->checked == 1 && $file->file_holder_id == auth()->user()->id) {
             $newFile = $bodyParameters['file'];
             $storagePath = Storage::disk('public')->put('documents', $newFile);
             $file->deleteFileFSDAO();
@@ -67,20 +59,21 @@ class FileService extends Service
                 'checked' => 0,
                 'version' => 0,
                 'path' => $storagePath,
-                'file_holder_id'=>null
+                'file_holder_id' => null
             ],
                 [
                     'id' => $id,
                 ]);
             return $file;
-        }else{
+        } else {
             return null;
         }
     }
 
-    public function freeFiles($files){
+    public function freeFiles($files)
+    {
         $res = [];
-        foreach($files as $file){
+        foreach ($files as $file) {
             $r = $file->updateObjectDAO(['checked' => 0, 'version' => 0], []);
             array_push($res, $r);
         }

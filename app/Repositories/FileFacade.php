@@ -7,46 +7,59 @@ use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 
 class FileFacade extends Facade
 {
-    CONST aspects_map = array(
-        'getMyFiles'=>array('LoggingAspect','TransactionAspect'),
-        'checkIn'=>array('LoggingAspect')
+    const aspects_map = array(
+        'getMyFiles' => array('TransactionAspect', 'LoggingAspect'),
+        'checkIn' => array('TransactionAspect', 'LoggingAspect'),
+        'bulkCheckIn' => array('TransactionAspect', 'LoggingAspect'),
+        'checkOut' => array('TransactionAspect', 'LoggingAspect'),
+        'uploadFiles' => array('TransactionAspect', 'LoggingAspect'),
+        'removeFiles' => array('TransactionAspect', 'LoggingAspect'),
+        'readFile' => array('TransactionAspect', 'LoggingAspect'),
     );
+
     public function __construct($message)
     {
         parent::__construct($message);
     }
 
-    public function checkIn(){
-        $id =  $this->message['urlParameters']['id'];
+    public function checkIn()
+    {
+        $id = $this->message['urlParameters']['id'];
         $file = $this->fileService->checkIn($id);
         return $file;
     }
 
-    public function checkOut(){
+    public function checkOut()
+    {
 
-        $bodyParameters =  $this->message['bodyParameters'];
+        $bodyParameters = $this->message['bodyParameters'];
         $file = $this->fileService->checkOut($bodyParameters);
         return $file;
     }
-    public function getMyFiles(){
+
+    public function getMyFiles()
+    {
         $files = $this->fileService->getMyFiles();
         return $files;
     }
 
-    public function bulkCheckIn(){
-        $id_array =  $this->message['bodyParameters'];
+    public function bulkCheckIn()
+    {
+        $id_array = $this->message['bodyParameters'];
         $file = $this->fileService->bulkCheckIn($id_array['file_ids']);
         return $file;
     }
 
-    public function uploadFiles(){
+    public function uploadFiles()
+    {
         $files = $this->fileService->uploadFiles($this->message['bodyParameters']);
         return $files;
     }
 
-    public function removeFiles(){
+    public function removeFiles()
+    {
 
-        $id_array =  $this->message['bodyParameters'];
+        $id_array = $this->message['bodyParameters'];
 
         $files = null;
         $res = $this->fileService->bulkCheckIn($id_array['file_ids']);
@@ -57,8 +70,9 @@ class FileFacade extends Facade
     }
 
 
-    public function readFile(){
-        $id =  $this->message['urlParameters']['id'];
+    public function readFile()
+    {
+        $id = $this->message['urlParameters']['id'];
         $res = $this->fileService->readFile($id);
 
         return $res;
