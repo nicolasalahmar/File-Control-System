@@ -13,38 +13,50 @@ class GenericModel extends Model
 {
     use HasFactory;
 
-    public $validation_rules=[];
+    public $validation_rules = [];
 
-    public static function getObjectDAO($id){
+    public static function getObjectDAO($id)
+    {
 
-        $class=get_called_class();
+        $class = get_called_class();
         $key = $class.$id;
 
         $object = Cache::get($key);
 
-        if($object==null) {
+        if ($object == null) {
             $object = self::find($id);
-            if ($object == null){
-                throw new ObjectNotFoundException($class.' object not found');
-            }else{
-                Cache::add($key,$object,env('CACHE_EXPIRY'));
+            if ($object == null) {
+                throw new ObjectNotFoundException($class . ' object not found');
+            } else {
+                Cache::add($key, $object, env('CACHE_EXPIRY'));
             }
         }
         return $object;
     }
 
+    public static function getMultipleObjectsConditionDAO($condition)
+    {
+        $class = get_called_class();
+        $objects = self::where($condition)->get();
+        if ($objects == null) {
+            throw new ObjectNotFoundException($class . ' object not found');
+        }
+        return $objects;
+    }
 
-    public function updateObjectDAO($array=[],$customCond=[]){
 
-        $class=get_called_class();
+    public function updateObjectDAO($array = [], $customCond = [])
+    {
+
+        $class = get_called_class();
         $id = $this->id;
-        $key = $class.$id;
+        $key = $class . $id;
 
         Cache::forget($key);
 
-        $res = $this->where($customCond + ['id'=>$this->id])->update($array);
-        if ($res < 1){
-            throw new ObjectNotFoundException($class.' object not found');
+        $res = $this->where($customCond + ['id' => $this->id])->update($array);
+        if ($res < 1) {
+            throw new ObjectNotFoundException($class . ' object not found');
         }
         return $res;
     }
@@ -55,32 +67,34 @@ class GenericModel extends Model
 
         $res = $this->delete();
 
-        if ($res < 1){
-            throw new ObjectNotFoundException(get_called_class().' object not found');
+        if ($res < 1) {
+            throw new ObjectNotFoundException(get_called_class() . ' object not found');
         }
         return $res;
     }
 
-    public static function dropCachesDAO($id_array){
-        $class=get_called_class();
-        foreach ($id_array as $id){
-            $key = $class.$id;
+    public static function dropCachesDAO($id_array)
+    {
+        $class = get_called_class();
+        foreach ($id_array as $id) {
+            $key = $class . $id;
             Cache::forget($key);
         }
     }
 
-    public static function createObjectDAO($parameters){
-        $class_name=get_called_class();
+    public static function createObjectDAO($parameters)
+    {
+        $class_name = get_called_class();
         $class = new $class_name();
         $validation_rules = $class->validation_rules;
 
         $validator = Validator::make($parameters, $validation_rules);
 
-        if(!$validator->fails()){
+        if (!$validator->fails()) {
             $obj = $class::create($parameters);
 
             return $obj;
-        }else{
+        } else {
             throw new CreateObjectException($validator->errors()->first());
         }
     }

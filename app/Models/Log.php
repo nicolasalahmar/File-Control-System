@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Log extends Model
+class Log extends GenericModel
 {
     use HasFactory;
 
@@ -15,4 +15,6 @@ class Log extends Model
       "username",
       "user_id"
     ];
+
+    public $timestamps = false;
 }

@@ -1,7 +1,12 @@
 <?php
 
 return array(
-
+    "log"=>array(
+        'UserReports'=> array(
+            'success'=> 'User Reports Fetched successfully',
+            'failure'=> 'Error fetching User Reports'
+        )
+    ),
         "group"=>array(
             "createGroup"=>array(
                 "success"=>"Group created successfully",

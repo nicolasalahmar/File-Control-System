@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string("operation");
             $table->string("username");
             $table->string("status");
-            $table->timestamps();
+            $table->timestamp('created_at', 6)->useCurrent();
         });
 
 

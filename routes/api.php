@@ -36,6 +36,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/enrolledGroups', [TransformerController::class, 'transform'])->name('group.enrolledGroups');
     Route::get('/removeGroup/{id}', [TransformerController::class, 'transform'])->name('group.removeGroup');
     Route::get('/filesInGroup/{id}', [TransformerController::class, 'transform'])->name('group.filesInGroup');
+    Route::get('/UserReports/{id}', [TransformerController::class, 'transform'])->name('log.UserReports');
+    Route::get('/FileReports/{id}', [TransformerController::class, 'transform'])->name('log.FileReports');
 });
 
 Route::post('/auth/logIn',[TransformerController::class,'transform'])->name('user.logIn');

@@ -1,0 +1,4 @@
+### GET request with parameter
+GET {{host}}/api/UserReports/1
+Accept: application/json
+Authorization: Bearer {{user_token}}

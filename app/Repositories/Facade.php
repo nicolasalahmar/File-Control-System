@@ -2,8 +2,8 @@
 
 namespace App\Repositories;
 
-use App\Exceptions\CreateObjectException;
 use App\Services\FileService;
+use App\Services\LogService;
 use App\Services\UserService;
 use App\Services\GroupService;
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
@@ -22,6 +22,7 @@ class Facade extends BaseRepository
     private $facadeMapper = [];
     protected $userService;
     protected $fileService;
+    protected $logService;
     protected $groupService;
     protected $aspects_map = [];
 
@@ -30,10 +31,12 @@ class Facade extends BaseRepository
         $this->userService = new UserService();
         $this->fileService = new FileService();
         $this->groupService = new GroupService();
+        $this->logService = new LogService();
 
         $this->facadeMapper = [
             "user" => "App\\Repositories\\UserFacade",
             "file" => "App\\Repositories\\FileFacade",
+            "log" => "App\\Repositories\\LogFacade",
             "group" => "App\\Repositories\\GroupFacade",
         ];
 
