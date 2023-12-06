@@ -8,7 +8,8 @@ use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 class FileFacade extends Facade
 {
     CONST aspects_map = array(
-        'getMyFiles'=>array('LoggingAspect','TransactionAspect')
+        'getMyFiles'=>array('LoggingAspect','TransactionAspect'),
+        'checkIn'=>array('LoggingAspect')
     );
     public function __construct($message)
     {

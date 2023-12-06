@@ -8,7 +8,7 @@ use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 class UserFacade extends Facade
 {
     CONST aspects_map = array(
-
+        'logIn'=>array('TransactionAspect')
     );
     public function __construct($message)
     {
