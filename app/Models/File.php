@@ -30,4 +30,8 @@ class File extends GenericModel
         return $this->belongsTo(User::class,'file_holder_id');
     }
 
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class, 'group_files','file_id')->withTimestamps();
+    }
 }

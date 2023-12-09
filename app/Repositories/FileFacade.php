@@ -9,12 +9,12 @@ class FileFacade extends Facade
 {
     const aspects_map = array(
         'getMyFiles' => array('TransactionAspect', 'LoggingAspect'),
-        'checkIn' => array('TransactionAspect', 'LoggingAspect'),
+        'checkIn' => array('TransactionAspect', 'LoggingAspect','FileLoggingAspect'),
         'bulkCheckIn' => array('TransactionAspect', 'LoggingAspect'),
-        'checkOut' => array('TransactionAspect', 'LoggingAspect'),
-        'uploadFiles' => array('TransactionAspect', 'LoggingAspect'),
+        'checkOut' => array('TransactionAspect', 'LoggingAspect','FileLoggingAspect'),
+        'uploadFiles' => array('TransactionAspect', 'LoggingAspect','FileLoggingAspect'),
         'removeFiles' => array('TransactionAspect', 'LoggingAspect'),
-        'readFile' => array('TransactionAspect', 'LoggingAspect'),
+        'readFile' => array('TransactionAspect', 'LoggingAspect','AuthorizationAspect'),
     );
 
     public function __construct($message)
