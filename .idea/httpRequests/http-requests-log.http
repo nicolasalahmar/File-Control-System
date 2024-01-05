@@ -1,3 +1,557 @@
+GET http://127.0.0.1:8000/api/removeGroup/1
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer 9|xXB14fGdAmWSEBiwhgK0Y2PjrOH7lE6aFWvus9iS0d3270be
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-01-05T213546.200.json
+
+###
+
+GET http://127.0.0.1:8000/api/removeGroup/1
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer 9|xXB14fGdAmWSEBiwhgK0Y2PjrOH7lE6aFWvus9iS0d3270be
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-01-05T213527.200.json
+
+###
+
+POST http://127.0.0.1:8000/api/addUsersToGroup
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer 9|xXB14fGdAmWSEBiwhgK0Y2PjrOH7lE6aFWvus9iS0d3270be
+Content-Length: 46
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "group_id": 1,
+    "users_ids": [2, 3]
+}
+
+<> 2024-01-05T213513.200.json
+
+###
+
+POST http://127.0.0.1:8000/api/createGroup
+Authorization: Bearer 9|xXB14fGdAmWSEBiwhgK0Y2PjrOH7lE6aFWvus9iS0d3270be
+Content-Type: application/json
+Accept: application/json
+Content-Length: 28
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "name": "test group"
+}
+
+<> 2024-01-05T213503.200.json
+
+###
+
+POST http://127.0.0.1:8000/api/auth/logIn
+Content-Type: application/json
+Accept: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "email": "nicolasalahmar@gmail.com",
+    "password": "12345678"
+}
+
+<> 2024-01-05T213459.200.json
+
+###
+
+POST http://127.0.0.1:8000/api/createGroup
+Authorization: Bearer 61|Hbciv5JjcP2DmitatzlOVBXNaVmJdZgXxkzpZebP198d6c08
+Content-Type: application/json
+Accept: application/json
+Content-Length: 28
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "name": "test group"
+}
+
+<> 2024-01-05T213454.401.json
+
+###
+
+POST http://127.0.0.1:8000/api/auth/register
+accept: application/json
+Content-Type: application/json;
+Content-Length: 93
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "email":"test24@gmail.com",
+    "password": "12345678",
+    "name": "nicolas alahmar"
+}
+
+<> 2024-01-05T213435.200.json
+
+###
+
+POST http://127.0.0.1:8000/api/auth/register
+accept: application/json
+Content-Type: application/json;
+Content-Length: 93
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "email":"test25@gmail.com",
+    "password": "12345678",
+    "name": "nicolas alahmar"
+}
+
+<> 2024-01-05T213430.200.json
+
+###
+
+POST https://internet-application02324.000webhostapp.com/api/addUsersToGroup
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer 61|Hbciv5JjcP2DmitatzlOVBXNaVmJdZgXxkzpZebP198d6c08
+Content-Length: 49
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "group_id": 19,
+    "users_ids": [16, 15]
+}
+
+<> 2024-01-05T213328.200.json
+
+###
+
+POST https://internet-application02324.000webhostapp.com/api/auth/register
+accept: application/json
+Content-Type: application/json;
+Content-Length: 93
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "email":"test25@gmail.com",
+    "password": "12345678",
+    "name": "nicolas alahmar"
+}
+
+<> 2024-01-05T213128.200.json
+
+###
+
+POST https://internet-application02324.000webhostapp.com/api/auth/register
+accept: application/json
+Content-Type: application/json;
+Content-Length: 93
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "email":"test24@gmail.com",
+    "password": "12345678",
+    "name": "nicolas alahmar"
+}
+
+<> 2024-01-05T213121.200.json
+
+###
+
+POST https://internet-application02324.000webhostapp.com/api/createGroup
+Authorization: Bearer 61|Hbciv5JjcP2DmitatzlOVBXNaVmJdZgXxkzpZebP198d6c08
+Content-Type: application/json
+Accept: application/json
+Content-Length: 28
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "name": "test group"
+}
+
+<> 2024-01-05T213034.200.json
+
+###
+
+POST https://internet-application02324.000webhostapp.com/api/auth/logIn
+Content-Type: application/json
+Accept: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "email": "nicolasalahmar@gmail.com",
+    "password": "12345678"
+}
+
+<> 2024-01-05T213005.200.json
+
+###
+
+POST https://internet-application02324.000webhostapp.com/api/auth/logIn
+Content-Type: application/json
+Accept: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "email": "nicolasalahmar@gmail.com",
+    "password": "12345678"
+}
+
+<> 2023-12-15T210031.200.json
+
+###
+
+GET https://internet-application02324.000webhostapp.com/api/MyGroups
+Accept: application/json, text/plain, */*
+Content-Type: application/json
+Referer: http://localhost:5173/
+Sec-Ch-Ua: "Opera";v="105", "Chromium";v="119", "Not?A_Brand";v="24"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Windows"
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 OPR/105.0.0.0
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-15T204013.200.json
+
+###
+
+POST http://127.0.0.1:8000/api/auth/logIn
+Content-Type: application/json
+Accept: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "email": "nicolasalahmar@gmail.com",
+    "password": "12345678"
+}
+
+<> 2023-12-15T203634.200.json
+
+###
+
+GET http://127.0.0.1:8000/api/MyGroups
+Accept: application/json, text/plain, */*
+Content-Type: application/json
+Referer: http://localhost:5173/
+Sec-Ch-Ua: "Opera";v="105", "Chromium";v="119", "Not?A_Brand";v="24"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Windows"
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 OPR/105.0.0.0
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-15T203624.200.json
+
+###
+
+GET http://127.0.0.1:8000/api/MyGroups
+Accept: application/json, text/plain, */*
+Content-Type: application/json
+Referer: http://localhost:5173/
+Sec-Ch-Ua: "Opera";v="105", "Chromium";v="119", "Not?A_Brand";v="24"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Windows"
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 OPR/105.0.0.0
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-15T203553.500.json
+
+###
+
+GET http://127.0.0.1:8000/api/MyGroups
+Accept: application/json, text/plain, */*
+Content-Type: application/json
+Referer: http://localhost:5173/
+Sec-Ch-Ua: "Opera";v="105", "Chromium";v="119", "Not?A_Brand";v="24"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Windows"
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 OPR/105.0.0.0
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-15T203533.500.json
+
+###
+
+GET http://127.0.0.1:8000/api/MyGroups
+Accept: application/json, text/plain, */*
+Content-Type: application/json
+Referer: http://localhost:5173/
+Sec-Ch-Ua: "Opera";v="105", "Chromium";v="119", "Not?A_Brand";v="24"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Windows"
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 OPR/105.0.0.0
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-15T203453.401.json
+
+###
+
+POST http://127.0.0.1:8000/api/auth/logIn
+Content-Type: application/json
+Accept: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "email": "nicolasalahmar@gmail.com",
+    "password": "12345678"
+}
+
+<> 2023-12-15T203439.200.json
+
+###
+
+POST http://127.0.0.1:8000/api/auth/logIn
+Content-Type: application/json
+Accept: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "email": "nicolasalahmar@gmail.com",
+    "password": "12345678"
+}
+
+<> 2023-12-15T203418.200.json
+
+###
+
+POST http://127.0.0.1:8000/api/auth/logIn
+Content-Type: application/json
+Accept: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "email": "nicolasalahmar@gmail.com",
+    "password": "12345678"
+}
+
+<> 2023-12-15T203342.200.json
+
+###
+
+GET https://internet-application02324.000webhostapp.com/api/MyGroups
+Accept: application/json, text/plain, */*
+Authorization: Bearer 47|CFYc25I7uh9OiRqfVBcoUgqMTJRIxn5iewNN2UQvb4462af2
+Content-Type: application/json
+Referer: http://localhost:5173/
+Sec-Ch-Ua: "Opera";v="105", "Chromium";v="119", "Not?A_Brand";v="24"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Windows"
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 OPR/105.0.0.0
+Connection: Keep-Alive
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-15T193734.200.json
+
+###
+
+GET https://internet-application02324.000webhostapp.com/api/MyGroups
+Content-Type: application/json
+Accept: application/json, text/plain, */*
+Authorization: Bearer 52|hCGryUX0yCJ3PdVNl1JxkLnGpYOfzRyvwqRqPQZz6f592630
+Referer: http://localhost:5173/
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-15T193455.200.json
+
+###
+
+GET https://internet-application02324.000webhostapp.com/api/MyGroups
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer 52|hCGryUX0yCJ3PdVNl1JxkLnGpYOfzRyvwqRqPQZz6f592630
+Referer: http://localhost:5173/
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-15T193436.200.json
+
+###
+
+GET https://internet-application02324.000webhostapp.com/api/MyGroups
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer 52|hCGryUX0yCJ3PdVNl1JxkLnGpYOfzRyvwqRqPQZz6f592630
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-15T193220.200.json
+
+###
+
+POST https://internet-application02324.000webhostapp.com/api/auth/logIn
+Content-Type: application/json
+Accept: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "email": "nicolasalahmar@gmail.com",
+    "password": "12345678"
+}
+
+<> 2023-12-15T193208.200.json
+
+###
+
+POST http://127.0.0.1:8000/api/auth/logIn
+Content-Type: application/json
+Accept: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "email": "nicolasalahmar@gmail.com",
+    "password": "12345678"
+}
+
+<> 2023-12-15T193135.500.json
+
+###
+
+GET http://127.0.0.1:8000/api/checkIn/2
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer 4|ogjmdiqYnttsNfgtxnuR4n69bsj4zLmhmn46mvQ3eea0e36b
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-11T132750.200.json
+
+###
+
+POST http://127.0.0.1:8000/api/uploadFiles
+Authorization: Bearer 4|ogjmdiqYnttsNfgtxnuR4n69bsj4zLmhmn46mvQ3eea0e36b
+Accept: application/json
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+Content-Length: 324
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+--WebAppBoundary
+Content-Disposition: form-data; name="files[]"; filename="useful shortcuts.txt"
+
+< C:\Users\Nicol\OneDrive\Desktop\Notepad\useful shortcuts.txt
+--WebAppBoundary--
+
+<> 2023-12-11T132745.200.json
+
+###
+
+GET http://127.0.0.1:8000/api/checkIn/1
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer 4|ogjmdiqYnttsNfgtxnuR4n69bsj4zLmhmn46mvQ3eea0e36b
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-11T132719.200.json
+
+###
+
+GET http://127.0.0.1:8000/api/checkIn/1
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer 4|ogjmdiqYnttsNfgtxnuR4n69bsj4zLmhmn46mvQ3eea0e36b
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-11T132623.500.json
+
+###
+
+POST http://127.0.0.1:8000/api/auth/logIn
+Content-Type: application/json
+Accept: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "email": "nicolasalahmar@gmail.com",
+    "password": "12345678"
+}
+
+<> 2023-12-11T132615.200.json
+
+###
+
+POST http://127.0.0.1:8000/api/auth/logIn
+Content-Type: application/json
+Accept: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "email": "nicolasalahmar@gmail.com",
+    "password": "12345678"
+}
+
+<> 2023-12-11T132549.500.json
+
+###
+
 GET http://127.0.0.1:8000/api/filesInGroup/13
 Content-Type: application/json
 Accept: application/json
@@ -186,493 +740,6 @@ User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
 <> 2023-11-29T221355.200.json
-
-###
-
-POST http://127.0.0.1:8000/api/createGroup
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Content-Type: application/json
-Accept: application/json
-Content-Length: 22
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "name": "test"
-}
-
-<> 2023-11-29T221229.200.json
-
-###
-
-POST http://127.0.0.1:8000/api/addFilesToGroup
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Content-Type: application/json;
-Accept: application/json
-Content-Length: 47
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "group_id": 12,
-    "files_ids": [1, 2]
-}
-
-<> 2023-11-29T220242.200.json
-
-###
-
-POST http://127.0.0.1:8000/api/createGroup
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Content-Type: application/json
-Accept: application/json
-Content-Length: 22
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "name": "test"
-}
-
-<> 2023-11-29T220235.200.json
-
-###
-
-POST http://127.0.0.1:8000/api/addFilesToGroup
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Content-Type: application/json;
-Accept: application/json
-Content-Length: 47
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "group_id": 11,
-    "files_ids": [1, 2]
-}
-
-<> 2023-11-29T212916.200.json
-
-###
-
-POST http://127.0.0.1:8000/api/createGroup
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Content-Type: application/json
-Accept: application/json
-Content-Length: 22
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "name": "test"
-}
-
-<> 2023-11-29T212906.200.json
-
-###
-
-GET http://127.0.0.1:8000/api/removeGroup/10
-Content-Type: application/json
-Accept: application/json
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-29T212633.200.json
-
-###
-
-GET http://127.0.0.1:8000/api/removeGroup/9
-Content-Type: application/json
-Accept: application/json
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-29T212602.200.json
-
-###
-
-POST http://127.0.0.1:8000/api/addFilesToGroup
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Content-Type: application/json;
-Accept: application/json
-Content-Length: 47
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "group_id": 10,
-    "files_ids": [1, 2]
-}
-
-<> 2023-11-29T212149.200.json
-
-###
-
-POST http://127.0.0.1:8000/api/addFilesToGroup
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Content-Type: application/json;
-Accept: application/json
-Content-Length: 46
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "group_id": 9,
-    "files_ids": [1, 2]
-}
-
-<> 2023-11-29T212140.200.json
-
-###
-
-POST http://127.0.0.1:8000/api/createGroup
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Content-Type: application/json
-Accept: application/json
-Content-Length: 22
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "name": "test"
-}
-
-<> 2023-11-29T212135.200.json
-
-###
-
-GET http://127.0.0.1:8000/api/removeGroup/9
-Content-Type: application/json
-Accept: application/json
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-29T212106.200.json
-
-###
-
-GET http://127.0.0.1:8000/api/removeGroup/9
-Content-Type: application/json
-Accept: application/json
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-29T211743.200.json
-
-###
-
-GET http://127.0.0.1:8000/api/removeGroup/9
-Content-Type: application/json
-Accept: application/json
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-29T211626.200.json
-
-###
-
-GET http://127.0.0.1:8000/api/removeGroup/9
-Content-Type: application/json
-Accept: application/json
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-29T211500.500.html
-
-###
-
-GET http://127.0.0.1:8000/api/removeGroup/9
-Content-Type: application/json
-Accept: application/json
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-29T211442.500.html
-
-###
-
-GET http://127.0.0.1:8000/api/removeGroup/9
-Content-Type: application/json
-Accept: application/json
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-29T211420.500.html
-
-###
-
-GET http://127.0.0.1:8000/api/removeGroup/9
-Content-Type: application/json
-Accept: application/json
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-29T211332.500.html
-
-###
-
-GET http://127.0.0.1:8000/api/removeGroup/9
-Content-Type: application/json
-Accept: application/json
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-29T211311.500.html
-
-###
-
-POST http://127.0.0.1:8000/api/addFilesToGroup
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Content-Type: application/json;
-Accept: application/json
-Content-Length: 46
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "group_id": 9,
-    "files_ids": [1, 2]
-}
-
-<> 2023-11-29T211251.200.json
-
-###
-
-POST http://127.0.0.1:8000/api/addFilesToGroup
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Content-Type: application/json;
-Accept: application/json
-Content-Length: 46
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "group_id": 8,
-    "files_ids": [1, 2]
-}
-
-<> 2023-11-29T211239.200.json
-
-###
-
-GET http://127.0.0.1:8000/api/removeGroup/9
-Content-Type: application/json
-Accept: application/json
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-29T211020.500.html
-
-###
-
-GET http://127.0.0.1:8000/api/removeGroup/9
-Content-Type: application/json
-Accept: application/json
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-29T210920.200.json
-
-###
-
-POST http://127.0.0.1:8000/api/createGroup
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Content-Type: application/json
-Accept: application/json
-Content-Length: 22
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "name": "test"
-}
-
-<> 2023-11-29T210909.200.json
-
-###
-
-GET http://127.0.0.1:8000/api/removeGroup/8
-Content-Type: application/json
-Accept: application/json
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-29T210902.200.json
-
-###
-
-GET http://127.0.0.1:8000/api/removeGroup/8
-Content-Type: application/json
-Accept: application/json
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-29T210853.200.json
-
-###
-
-GET http://127.0.0.1:8000/api/removeGroup/8
-Content-Type: application/json
-Accept: application/json
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-29T210806.200.json
-
-###
-
-GET http://127.0.0.1:8000/api/removeGroup/8
-Content-Type: application/json
-Accept: application/json
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-29T210750.500.html
-
-###
-
-GET http://127.0.0.1:8000/api/removeGroup/8
-Content-Type: application/json
-Accept: application/json
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-29T210735.500.html
-
-###
-
-GET http://127.0.0.1:8000/api/removeGroup/7
-Content-Type: application/json
-Accept: application/json
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-29T210728.200.json
-
-###
-
-GET http://127.0.0.1:8000/api/removeGroup/7
-Content-Type: application/json
-Accept: application/json
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-29T210709.500.html
-
-###
-
-GET http://127.0.0.1:8000/api/removeGroup/7
-Content-Type: application/json
-Accept: application/json
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-29T210654.200.json
-
-###
-
-GET http://127.0.0.1:8000/api/removeGroup/7
-Content-Type: application/json
-Accept: application/json
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-29T210626.200.json
-
-###
-
-GET http://127.0.0.1:8000/api/removeGroup/7
-Content-Type: application/json
-Accept: application/json
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-29T210616.200.json
-
-###
-
-GET http://127.0.0.1:8000/api/removeGroup/7
-Content-Type: application/json
-Accept: application/json
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-29T210559.200.json
-
-###
-
-POST http://127.0.0.1:8000/api/addFilesToGroup
-Authorization: Bearer 32|Vm0cEsufrsLjm7upmZyfbrqhy2yC15heiIh3MmUKb0348433
-Content-Type: application/json;
-Accept: application/json
-Content-Length: 46
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "group_id": 8,
-    "files_ids": [1, 2]
-}
-
-<> 2023-11-29T210533.200.json
 
 ###
 

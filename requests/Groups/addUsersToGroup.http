@@ -1,4 +1,9 @@
-GET {{host}}/api/checkIn/2
+POST {{host}}/api/addUsersToGroup
 Content-Type: application/json
 Accept: application/json
 Authorization: Bearer {{user_token}}
+
+{
+    "group_id": 1,
+    "users_ids": [2, 3]
+}

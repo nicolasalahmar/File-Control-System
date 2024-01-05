@@ -124,6 +124,6 @@ class GroupService extends Service{
 
     public function groupsUserEnrolledIn($user)
     {
-        return $user->groups()->get();
+        return $user->groups()->with('users')->get();
     }
 }

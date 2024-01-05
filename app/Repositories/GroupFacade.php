@@ -9,7 +9,7 @@ class GroupFacade extends Facade
 {
 
     CONST aspects_map = array(
-
+        'createGroup' => array('TransactionAspect'),
     );
     public function __construct($message)
     {
@@ -20,6 +20,11 @@ class GroupFacade extends Facade
     public function createGroup()
     {
             $group = $this->groupService->createGroup($this->message['bodyParameters']);
+            $message = [
+                    'group_id'=> $group->id,
+                    'users_ids'=> [auth()->user()->id]
+            ];
+            $group = $this->groupService->addUsersToGroup($message);
             return $group;
     }
     public function addFilesToGroup(){
