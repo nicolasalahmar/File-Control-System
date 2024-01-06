@@ -2,14 +2,19 @@
 
 namespace App\Repositories;
 
-use App\Services\GroupService;
-use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
-
 class GroupFacade extends Facade
 {
 
     CONST aspects_map = array(
         'createGroup' => array('TransactionAspect'),
+        'removeGroup'=> array('TransactionAspect'),
+        'addFilesToGroup'=> array('TransactionAspect'),
+        'addUsersToGroup'=> array('TransactionAspect'),
+        'removeFilesFromGroup'=> array('TransactionAspect'),
+        'removeUsersFromGroup'=> array('TransactionAspect'),
+        'myGroups'=> array('TransactionAspect'),
+        'enrolledGroups'=> array('TransactionAspect'),
+        'filesInGroup'=> array('TransactionAspect'),
     );
     public function __construct($message)
     {
@@ -48,7 +53,8 @@ class GroupFacade extends Facade
         $id = $this->message['urlParameters']['id'];
         $files = $this->groupService->getGroupFiles($id);
         $check = $this->fileService->bulkCheckIn($files->pluck('id')->toArray());
-        if ($check != null){
+
+        if ($check || !empty($files)){
             $res = $this->groupService->removeGroup($id);
             $this->fileService->freeFiles($files);
         }
@@ -60,7 +66,6 @@ class GroupFacade extends Facade
     public function enrolledGroups(){
         return $this->groupService->groupsUserEnrolledIn(auth()->user());
     }
-
     public function filesInGroup(){
         $id = $this->message['urlParameters']['id'];
         return $this->groupService->getGroupFiles($id);
