@@ -14,7 +14,7 @@ class FileFacade extends Facade
         'checkOut' => array('TransactionAspect', 'LoggingAspect','FileLoggingAspect'),
         'uploadFiles' => array('TransactionAspect', 'LoggingAspect','FileLoggingAspect'),
         'removeFiles' => array('TransactionAspect', 'LoggingAspect'),
-        'readFile' => array('TransactionAspect', 'LoggingAspect','AuthorizationAspect'),
+        'readFile' => array('TransactionAspect', 'LoggingAspect'),
     );
 
     public function __construct($message)
@@ -62,7 +62,9 @@ class FileFacade extends Facade
         $id_array = $this->message['bodyParameters'];
 
         $files = null;
+
         $res = $this->fileService->bulkCheckIn($id_array['file_ids']);
+
         if ($res != null)
             $files = $this->fileService->removeFiles($id_array['file_ids']);
 

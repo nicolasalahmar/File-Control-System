@@ -7,6 +7,7 @@ use App\Exceptions\ObjectNotFoundException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
 class GenericModel extends Model
@@ -30,6 +31,13 @@ class GenericModel extends Model
             } else {
                 Cache::add($key, $object, env('CACHE_EXPIRY'));
             }
+        }
+
+        $trace = debug_backtrace();
+        $policy = Gate::getPolicyFor($class);
+
+        if (method_exists($policy,$trace[1]['function']) && !auth()->user()->can($trace[1]['function'], $object)) {
+            throw new \Exception("Unauthorized access");
         }
         return $object;
     }
@@ -98,4 +106,6 @@ class GenericModel extends Model
             throw new CreateObjectException($validator->errors()->first());
         }
     }
+
+
 }

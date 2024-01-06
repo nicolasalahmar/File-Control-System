@@ -50,7 +50,7 @@ class FileService extends Service
         $id = $bodyParameters["id"];
         $file = File::getObjectDAO($id);
 
-        if (isset($file) && $file->checked == 1 && $file->file_holder_id == auth()->user()->id) {
+        if (isset($file) && $file->checked == 1 ) {
             $newFile = $bodyParameters['file'];
             $storagePath = Storage::disk('public')->put('documents', $newFile);
             $file->deleteFileFSDAO();

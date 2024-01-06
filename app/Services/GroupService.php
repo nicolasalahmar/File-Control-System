@@ -83,7 +83,7 @@ class GroupService extends Service{
         $ids = $bodyParameters['users_ids'][0];
         $ids_arr = preg_split ("/\,/", $ids);
 
-        if(!$this->checkUsersCheckedFilesInGroup($groupFiles,$ids_arr)){
+        if(!$this->checkUsersCheckedFilesInGroup($groupFiles,$ids_arr) && !in_array(auth()->user()->id,$ids_arr)){
             foreach($ids_arr as $id){
                 $group->users()->detach($id);
             }
