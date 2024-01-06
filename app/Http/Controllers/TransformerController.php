@@ -43,7 +43,7 @@ class TransformerController extends Controller
         $facade = new Facade($message);
         $result = $facade->execute();
 
-        return response()->json($result['response']);
+        return response()->json($result['response'], isset($result["response"]["statusCode"]) && $result["response"]["statusCode"] != null ? $result["response"]["statusCode"] : 200);
     }
 
     public function getRouteExploded($message,$routeName){

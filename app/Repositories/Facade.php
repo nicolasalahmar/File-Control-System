@@ -64,13 +64,14 @@ class Facade extends BaseRepository
 
     }
 
-    public function exceptionResponse($errorMessage)
+    public function exceptionResponse($errorMessage,$statusCode)
     {
 
         return $this->message['response'] =
             [
                 "success" => false,
                 "message" => $errorMessage,
+                "statusCode" => $statusCode,
             ];
 
     }
@@ -103,7 +104,7 @@ class Facade extends BaseRepository
             return $this->message;
         } catch (\Exception $e) {
             $this->executeException($func, $facadeClass);
-            $this->message["response"] = $this->exceptionResponse($e->getMessage());
+            $this->message["response"] = $this->exceptionResponse($e->getMessage(),500);
             return $this->message;
         }
     }
