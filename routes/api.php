@@ -36,6 +36,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/enrolledGroups', [TransformerController::class, 'transform'])->name('group.enrolledGroups');
     Route::get('/removeGroup/{id}', [TransformerController::class, 'transform'])->name('group.removeGroup');
     Route::get('/filesInGroup/{id}', [TransformerController::class, 'transform'])->name('group.filesInGroup');
+
+});
+
+Route::middleware(['role:Admin','auth:sanctum'])->group(function () {
     Route::get('/UserReports/{id}', [TransformerController::class, 'transform'])->name('log.UserReports');
     Route::get('/FileReports/{id}', [TransformerController::class, 'transform'])->name('log.FileReports');
 });

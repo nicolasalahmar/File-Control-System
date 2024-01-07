@@ -32,8 +32,7 @@ class UserService extends Service{
             'user' => $user,
             'token' => $token
         ];
-    }
-    public function logOut(): bool
+    }    public function logOut(): bool
     {
         auth()->user()->tokens()->delete();
         return true;
