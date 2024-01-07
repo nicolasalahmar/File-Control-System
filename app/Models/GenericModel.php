@@ -42,17 +42,6 @@ class GenericModel extends Model
         return $object;
     }
 
-    public static function getMultipleObjectsConditionDAO($condition)
-    {
-        $class = get_called_class();
-        $objects = self::where($condition)->get();
-        if ($objects == null) {
-            throw new ObjectNotFoundException($class . ' object not found');
-        }
-        return $objects;
-    }
-
-
     public function updateObjectDAO($array = [], $customCond = [])
     {
 

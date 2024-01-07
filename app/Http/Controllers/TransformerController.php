@@ -16,6 +16,8 @@ class TransformerController extends Controller
 
         $urlParameters = $currentRoute->parameters();
 
+        $queryParameters = $request->all();
+
         $message = [];
 
         $message = $this->getRouteExploded($message,$routeName);
@@ -27,6 +29,13 @@ class TransformerController extends Controller
             $message['urlParameters']=[];
             foreach($urlParameters as $key=>$value){
                 $message['urlParameters'][$key]=$value;
+            }
+        }
+
+        if(count($queryParameters) >0){
+            $message['queryParameters']=[];
+            foreach($queryParameters as $key=>$value){
+                $message['queryParameters'][$key]=$value;
             }
         }
 

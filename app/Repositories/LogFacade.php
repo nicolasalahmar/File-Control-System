@@ -7,7 +7,7 @@ use App\Exceptions\ObjectNotFoundException;
 class LogFacade extends Facade
 {
     const aspects_map = array(
-        'UserReports' => array('TransactionAspect', 'LoggingAspect'),
+        'ExportOperationsReport' => array('TransactionAspect', 'LoggingAspect'),
         'FileReports' => array('TransactionAspect', 'LoggingAspect'),
     );
 
@@ -19,17 +19,13 @@ class LogFacade extends Facade
     /**
      * @throws ObjectNotFoundException
      */
-    public function UserReports()
+    public function ExportOperationsReport()
     {
-        $id = $this->message['urlParameters']['id'];
-        $this->message['logCondition'] = [['user_id', '=', $id], ['operation', '=', 'checkIn']];
-        return $this->logService->exportReport($this->message);
+        return $this->logService->exportOperationsReport($this->message);
     }
 
-//    public function FileReports()
-//    {
-//        $id = $this->message['urlParameters']['id'];
-//        $this->message['logCondition'] = [['file', '=', $id], ['operation', '=', 'checkIn']];
-//        return $this->logService->exportReport($this->message);
-//    }
+    public function FileReports()
+    {
+        return $this->logService->exportFileReport($this->message);
+    }
 }

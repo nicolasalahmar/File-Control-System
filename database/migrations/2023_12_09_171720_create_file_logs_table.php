@@ -13,10 +13,8 @@ return new class extends Migration
     {
         Schema::create('file_logs', function (Blueprint $table) {
             $table->id();
-            $table->datetime("upload_date")->nullable();
-            $table->datetime("check_in_date")->nullable();
-            $table->datetime("modify_date")->nullable();
-            $table->datetime("check_out_date")->nullable();
+            $table->datetime("date")->nullable();
+            $table->string("operation");
             $table->string("status")->nullable();
             $table->timestamps();
         });

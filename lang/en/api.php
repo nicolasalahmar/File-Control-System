@@ -2,9 +2,13 @@
 
 return array(
     "log"=>array(
-        'UserReports'=> array(
+        'ExportOperationsReport'=> array(
             'success'=> 'User Reports Fetched successfully',
             'failure'=> 'Error fetching User Reports'
+        ),
+        'FileReports'=> array(
+            'success'=> 'File Reports Fetched successfully',
+            'failure'=> 'Error fetching File Reports'
         )
     ),
         "group"=>array(

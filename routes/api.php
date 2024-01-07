@@ -40,8 +40,8 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::middleware(['role:Admin','auth:sanctum'])->group(function () {
-    Route::get('/UserReports/{id}', [TransformerController::class, 'transform'])->name('log.UserReports');
-    Route::get('/FileReports/{id}', [TransformerController::class, 'transform'])->name('log.FileReports');
+    Route::get('/ExportOperationsReport', [TransformerController::class, 'transform'])->name('log.ExportOperationsReport');
+    Route::get('/FileReports', [TransformerController::class, 'transform'])->name('log.FileReports');
 });
 
 Route::post('/auth/logIn',[TransformerController::class,'transform'])->name('user.logIn');

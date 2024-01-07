@@ -10,10 +10,8 @@ class FileLog extends Model
     use HasFactory;
 
     public  $fillable=[
-        "upload_date",
-        "check_in_date",
-        "modify_date",
-        "check_out_date",
+        "date",
+        "operation",
         "file_id",
         "user_id",
         "status"
