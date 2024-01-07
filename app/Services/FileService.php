@@ -38,7 +38,10 @@ class FileService extends Service
     public function bulkCheckIn($id_array)
     {
         $files = [];
-        foreach ($id_array as $id) {
+        $ids_arr = preg_split ("/\,/", $id_array);
+
+        foreach ($ids_arr as $id) {
+
             $file = $this->checkIn($id);
             array_push($files, $file);
         }
