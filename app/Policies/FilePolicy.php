@@ -11,14 +11,14 @@ class FilePolicy
     public function readFile(User $user, $obj): bool
     {
         if($obj instanceof File)
-            return $user->groups->intersect($obj->groups)->isNotEmpty();
+            return $user->groups->intersect($obj->groups)->isNotEmpty() || $obj->user_id == auth()->user()->id;
         else
             return true;
     }
     public function checkIn(User $user, $obj): bool
     {
         if($obj instanceof File)
-            return $user->groups->intersect($obj->groups)->isNotEmpty();
+            return $user->groups->intersect($obj->groups)->isNotEmpty() || $obj->user_id == auth()->user()->id;
         else
             return true;
     }
