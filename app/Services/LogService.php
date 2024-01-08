@@ -46,7 +46,7 @@ class LogService extends Service
 
     public function exportUserFileReports($message){
         $log = FileLog::where('id','!=','');
-        $id = $message["urlParameters"]["id"];
+        $id = auth()->user()->id;
 
         if($id != ""){
             $log=$log->where('user_id',$id);

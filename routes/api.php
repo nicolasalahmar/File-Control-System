@@ -45,7 +45,7 @@ Route::middleware(['role:Admin','auth:sanctum'])->group(function () {
 });
 
 Route::middleware(['role:User','auth:sanctum'])->group(function () {
-    Route::get('/UserFileReports/{id}', [TransformerController::class, 'transform'])->name('log.UserFileReports');
+    Route::get('/UserFileReports', [TransformerController::class, 'transform'])->name('log.UserFileReports');
 });
 
 
