@@ -5,6 +5,8 @@ namespace App\Services;
 use App\Exceptions\CheckInException;
 use App\Exceptions\fileDeletionException;
 use App\Exceptions\FileInUseException;
+use App\Exceptions\MaxFileSizeException;
+use App\Exceptions\MaxNumFileException;
 use App\Models\File;
 use App\Models\Group;
 use Exception;
@@ -102,6 +104,22 @@ class FileService extends Service
 
                 $storagePath = Storage::disk('public')->put('documents', $file);    //todo this should be DAO
 
+                $maxFileNumPerUser = env('MAX_FILE_NUM_PER_USER');
+                $maxFileSizePerUserMB = env('MAX_FILE_SIZE_PER_USER');
+
+
+                if ($maxFileNumPerUser !== null && $maxFileNumPerUser !== '') {
+                    $countFiles = File::where('user_id',auth()->user()->id)->count();
+                    if($countFiles +1 >= $maxFileNumPerUser){
+                        throw new MaxNumFileException('User Uploaded Maximum Number of Files !!');
+                    }
+                }
+                if ($maxFileSizePerUserMB !== null && $maxFileSizePerUserMB !== '') {
+                    $maxFileSizeBytes = $maxFileSizePerUserMB * 1024 * 1024;
+                    if ($file->getSize() > $maxFileSizeBytes) {
+                        throw new MaxFileSizeException('File Size Is Larger Than '. $maxFileSizePerUserMB .'MB !!');
+                    }
+                }
                 $parameters = [
                     'name' => $file->getClientOriginalName(),
                     'path' => $storagePath,

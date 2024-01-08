@@ -34,14 +34,24 @@ class FileLoggingAspect extends Aspect
             ]);
 
         }elseif($this->message["function"] == "bulkCheckIn" || $this->message["function"] == "uploadFiles"){
-            foreach($this->message["response"]["data"] as $key=>$data)
+            if(!isset($this->message["response"]["data"])){
                 FileLog::create([
                     "date"=>date("Y-m-d H:i:s"),
                     "operation"=>$this->message["function"],
-                    "file_id"=>$this->getResponseFileId($key),
+                    "file_id"=>null,
                     "user_id"=>auth()->user() != null ? auth()->user()->id : null,
                     "status"=>"Finished",
                 ]);
+            }else{
+                foreach($this->message["response"]["data"] as $key=>$data)
+                    FileLog::create([
+                        "date"=>date("Y-m-d H:i:s"),
+                        "operation"=>$this->message["function"],
+                        "file_id"=>$this->getResponseFileId($key),
+                        "user_id"=>auth()->user() != null ? auth()->user()->id : null,
+                        "status"=>"Finished",
+                    ]);
+            }
 
         }
 
@@ -57,14 +67,25 @@ class FileLoggingAspect extends Aspect
                 "status"=>"Exception",
             ]);
         }elseif($this->message["function"] == "bulkCheckIn" || $this->message["function"] == "uploadFiles"){
-            foreach($this->message["response"]["data"] as $key=>$data)
+            if(!isset($this->message["response"]["data"])){
                 FileLog::create([
                     "date"=>date("Y-m-d H:i:s"),
                     "operation"=>$this->message["function"],
-                    "file_id"=>$this->getResponseFileId($key),
+                    "file_id"=>null,
                     "user_id"=>auth()->user() != null ? auth()->user()->id : null,
                     "status"=>"Exception",
                 ]);
+            }else{
+                foreach($this->message["response"]["data"] as $key=>$data)
+                    FileLog::create([
+                        "date"=>date("Y-m-d H:i:s"),
+                        "operation"=>$this->message["function"],
+                        "file_id"=>$this->getResponseFileId($key),
+                        "user_id"=>auth()->user() != null ? auth()->user()->id : null,
+                        "status"=>"Exception",
+                    ]);
+            }
+
         }
 
 
