@@ -25,7 +25,7 @@ class UserService extends Service{
         if (!$user || !Hash::check($data['password'], $user->password)) {
             throw new loginError("User doesn't exists or credentials are wrong");
         }
-
+        $user->getRoleNames();
         $token = $user->createToken('apiToken')->plainTextToken;
 
         return [
