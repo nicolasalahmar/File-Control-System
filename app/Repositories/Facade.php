@@ -54,10 +54,9 @@ class Facade extends BaseRepository
 
     public function response($instance, $successMessage, $errorMessage)
     {
-
         return $this->message['response'] =
             [
-                "success" => $instance != null,
+                "success" => (is_array($instance)&& empty($instance) ? true : ($instance != null)) ,
                 "data" => $instance ?? null,
                 "message" => $instance != null ? $successMessage : $errorMessage,
             ];

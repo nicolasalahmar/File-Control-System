@@ -20,8 +20,11 @@ class File extends GenericModel
       'file_holder_id',
     ];
 
-    public $hidden = ['path'];
+    //public $hidden = ['path'];
 
+    protected $casts = [
+        'checked' => 'integer',
+    ];
     public function deleteFileFSDAO(){
         return Storage::disk('public')->delete($this->path);
     }

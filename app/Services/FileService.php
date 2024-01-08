@@ -38,13 +38,14 @@ class FileService extends Service
     public function bulkCheckIn($id_array)
     {
         $files = [];
-        $ids_arr = preg_split ("/\,/", $id_array);
 
-        foreach ($ids_arr as $id) {
+            $ids_arr = preg_split ("/\,/", $id_array);
 
-            $file = $this->checkIn($id);
-            array_push($files, $file);
-        }
+            foreach ($ids_arr as $id) {
+                $file = $this->checkIn($id);
+                array_push($files, $file);
+            }
+
         return $files;
     }
 
@@ -89,7 +90,7 @@ class FileService extends Service
         if (count($files) > 0) {
             return $files;
         } else {
-            return null;
+            return [];
         }
     }
 
@@ -124,10 +125,11 @@ class FileService extends Service
     {
         $all_deleted = [];
         $arr = [];
-
+        $id_array = explode(',',$id_array);
         if (count($id_array) > 0) {
 
             foreach ($id_array as $file_id) {
+
                 $file = File::getObjectDAO($file_id);
 
                 array_push($arr, $file);

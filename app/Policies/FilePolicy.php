@@ -23,7 +23,7 @@ class FilePolicy
             return true;
     }
 
-    public function removeFile(User $user, $obj): bool
+    public function removeFiles(User $user, $obj): bool
     {
         if($obj instanceof File)
             return $user->id == $obj->user_id;

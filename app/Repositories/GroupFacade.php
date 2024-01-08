@@ -29,7 +29,7 @@ class GroupFacade extends Facade
                     'group_id'=> $group->id,
                     'users_ids'=> [auth()->user()->id]
             ];
-            $group = $this->groupService->addUsersToGroup($message);
+            $groupAdded = $this->groupService->addUsersToGroup($message);
             return $group;
     }
     public function addFilesToGroup(){
@@ -50,14 +50,17 @@ class GroupFacade extends Facade
         return $res;
     }
     public function removeGroup(){
+
         $id = $this->message['urlParameters']['id'];
         $files = $this->groupService->getGroupFiles($id);
-        $check = $this->fileService->bulkCheckIn($files->pluck('id')->toArray());
 
-        if ($check || !empty($files)){
-            $res = $this->groupService->removeGroup($id);
-            $this->fileService->freeFiles($files);
+        if(!empty($files->toArray())){
+            $files_ids_imploded= implode(', ', $files->pluck('id')->toArray());
+            $check = $this->fileService->bulkCheckIn($files_ids_imploded);
         }
+
+        $res = $this->groupService->removeGroup($id);
+        $this->fileService->freeFiles($files);
         return $res??null;
     }
     public function myGroups(){

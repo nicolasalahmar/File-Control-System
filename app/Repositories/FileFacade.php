@@ -10,7 +10,7 @@ class FileFacade extends Facade
     const aspects_map = array(
         'getMyFiles' => array('TransactionAspect', 'LoggingAspect'),
         'checkIn' => array('TransactionAspect', 'LoggingAspect','FileLoggingAspect'),
-        'bulkCheckIn' => array('TransactionAspect', 'LoggingAspect'),
+        'bulkCheckIn' => array('TransactionAspect', 'LoggingAspect','FileLoggingAspect'),
         'checkOut' => array('TransactionAspect', 'LoggingAspect','FileLoggingAspect'),
         'uploadFiles' => array('TransactionAspect', 'LoggingAspect','FileLoggingAspect'),
         'removeFiles' => array('TransactionAspect', 'LoggingAspect'),

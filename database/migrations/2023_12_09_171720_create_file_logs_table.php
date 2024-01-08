@@ -23,7 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('file_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
-            $table->foreign('file_id')->references('id')->on('files')->onDelete('set null');
+            //$table->foreign('file_id')->references('id')->on('files')->onDelete('set null');
         });
     }
 
