@@ -171,6 +171,9 @@ class FileService extends Service
     public function readFile($id)
     {
         $file = File::getObjectDAO($id);
+        $file->path = storage_path('app/public/'.$file->path);
+        $file->path = str_replace('\\', '/', $file->path);
+
         return $file;
     }
 
