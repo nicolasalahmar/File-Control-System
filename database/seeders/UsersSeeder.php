@@ -14,22 +14,24 @@ class UsersSeeder extends Seeder
         'admin-view-log',
         'admin-view-file-log',
     ];
+
+    private $userPermissions = [
+        'user-view-file-log',
+    ];
     public function run()
     {
         $user = User::firstOrCreate(
-
-                ['name' => 'Admin',
-                'email' => 'admin@admin.com','password' => '12345678'],
-
+            ['name' => 'Admin'],
+            ['email' => 'admin@admin.com','password' => '12345678'],
         );
 
         $adminRole = Role::firstOrCreate(['name' => 'Admin']);
-
-        $user->syncPermissions($this->adminPermissions);
         $adminRole->syncPermissions($this->adminPermissions);
+        $user->syncPermissions($this->adminPermissions);
         $user->assignRole('Admin');
 
-
+        $userRole = Role::firstOrCreate(['name' => 'User']);
+        $userRole->syncPermissions($this->userPermissions);
 
     }
 }

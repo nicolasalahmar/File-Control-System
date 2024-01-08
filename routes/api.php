@@ -44,6 +44,11 @@ Route::middleware(['role:Admin','auth:sanctum'])->group(function () {
     Route::get('/FileReports', [TransformerController::class, 'transform'])->name('log.FileReports');
 });
 
+Route::middleware(['role:User','auth:sanctum'])->group(function () {
+    Route::get('/UserFileReports/{id}', [TransformerController::class, 'transform'])->name('log.UserFileReports');
+});
+
+
 Route::post('/auth/logIn',[TransformerController::class,'transform'])->name('user.logIn');
 Route::post('/auth/logOut',[TransformerController::class,'transform'])->middleware(['auth:sanctum'])->name('user.logOut');
 Route::get('/allUsers',[TransformerController::class,'transform'])->middleware(['auth:sanctum'])->name('user.allUsers');

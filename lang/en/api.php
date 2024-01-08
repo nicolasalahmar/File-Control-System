@@ -9,6 +9,10 @@ return array(
         'FileReports'=> array(
             'success'=> 'File Reports Fetched successfully',
             'failure'=> 'Error fetching File Reports'
+        ),
+        'UserFileReports'=> array(
+            'success'=> 'User File Reports Fetched successfully',
+            'failure'=> 'Error fetching User File Reports'
         )
     ),
         "group"=>array(

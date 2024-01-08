@@ -44,4 +44,16 @@ class LogService extends Service
         return $log->get();
     }
 
+    public function exportUserFileReports($message){
+        $log = FileLog::where('id','!=','');
+        $id = $message["urlParameters"]["id"];
+
+        if($id != ""){
+            $log=$log->where('user_id',$id);
+        }else{
+            return null;
+        }
+
+        return $log->get();
+    }
 }

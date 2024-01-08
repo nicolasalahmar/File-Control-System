@@ -15,6 +15,7 @@ class RoleSeeder extends Seeder
     private $permissions = [
         'admin-view-log',
         'admin-view-file-log',
+        'user-view-file-log'
     ];
 
     public function run(): void

@@ -28,4 +28,8 @@ class LogFacade extends Facade
     {
         return $this->logService->exportFileReport($this->message);
     }
+
+    public function UserFileReports(){
+        return $this->logService->exportUserFileReports($this->message);
+    }
 }

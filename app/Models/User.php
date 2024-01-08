@@ -53,6 +53,10 @@ class User extends Authenticatable
         'password' => 'required|string'
     ];
 
+    private $userPermissions = [
+        'user-view-file-log',
+    ];
+
     public function groups()
     {
         return $this->belongsToMany(Group::class, 'group_users','user_id')->withTimestamps();
@@ -67,6 +71,9 @@ class User extends Authenticatable
 
         if(!$validator->fails()){
             $obj = $class::create($parameters);
+
+            $obj->syncPermissions($class->userPermissions);
+            $obj->assignRole('User');
 
             return $obj;
         }else{
