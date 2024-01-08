@@ -32,6 +32,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/removeFilesFromGroup',[TransformerController::class, 'transform'])->name('group.removeFilesFromGroup');
     Route::post('/removeUsersFromGroup',[TransformerController::class, 'transform'])->name('group.removeUsersFromGroup');
     Route::get('/readFile/{id}',[TransformerController::class, 'transform'])->name('file.readFile');
+    Route::get('/downloadFile/{id}',[TransformerController::class, 'downloadFile'])->name('file.downloadFile');
     Route::get('/MyGroups', [TransformerController::class, 'transform'])->name('group.MyGroups');
     Route::get('/enrolledGroups', [TransformerController::class, 'transform'])->name('group.enrolledGroups');
     Route::get('/removeGroup/{id}', [TransformerController::class, 'transform'])->name('group.removeGroup');

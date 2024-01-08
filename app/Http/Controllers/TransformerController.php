@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Repositories\Facade;
@@ -67,6 +68,16 @@ class TransformerController extends Controller
             }
 
 
+    }
+
+
+    public function downloadFile($id)
+    {
+        $file = File::getObjectDAO($id);
+
+        $path = storage_path('app/public/' . $file->path);
+
+        return response()->file($path);
     }
 
 }
