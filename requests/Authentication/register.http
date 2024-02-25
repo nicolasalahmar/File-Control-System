@@ -1,0 +1,9 @@
+POST {{host}}/api/auth/register
+accept: application/json
+Content-Type: application/json;
+
+{
+    "email":"test24@gmail.com",
+    "password": "12345678",
+    "name": "nicolas alahmar"
+}

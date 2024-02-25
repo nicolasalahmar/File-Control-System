@@ -1,0 +1,46 @@
+# Files Collection
+
+###
+# @name checkIn
+GET http://127.0.0.1:8000/api/checkIn/2
+Authorization: Bearer 22|uRL0qO8IweDNxHBTY7J9FzhxerhQjv5bho2ad1v02fa217ac
+
+###
+# @name getMyFiles
+GET http://127.0.0.1:8000/api/getMyFiles
+Authorization: Bearer 22|uRL0qO8IweDNxHBTY7J9FzhxerhQjv5bho2ad1v02fa217ac
+
+###
+# @name uploadFile
+POST http://127.0.0.1:8000/api/uploadFiles
+Authorization: Bearer 22|uRL0qO8IweDNxHBTY7J9FzhxerhQjv5bho2ad1v02fa217ac
+Accept: application/json
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="files[]"; filename="TestFile.txt"
+
+< Lse3SU816/Test2.txt\Lse3SU816/TestFile.txt
+--WebAppBoundary
+
+###
+# @name bulkCheckIn
+POST http://127.0.0.1:8000/api/bulkCheckIn
+Authorization: Bearer 22|uRL0qO8IweDNxHBTY7J9FzhxerhQjv5bho2ad1v02fa217ac
+Accept: application/json
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file_ids[0]"
+
+1
+--WebAppBoundary
+Content-Disposition: form-data; name="file_ids[1]"
+
+2
+--WebAppBoundary
+
+###
+# @name removeFile
+POST http://127.0.0.1:8000/api/files/removeFiles
+Authorization: Bearer 22|uRL0qO8IweDNxHBTY7J9FzhxerhQjv5bho2ad1v02fa217ac

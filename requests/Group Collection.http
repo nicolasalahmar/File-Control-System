@@ -1,0 +1,77 @@
+# Group Collection
+
+###
+# @name createGroup
+POST {{host}}/api/createGroup
+Authorization: Bearer {{user_token}}
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="name"
+
+Test22
+--WebAppBoundary
+
+###
+# @name addFilesToGroup
+POST http://127.0.0.1:8000/api/addFilesToGroup
+Authorization: Bearer 4|M6JtE0ETxKtaR475PsSVr3ZZtT5f66Z0zUkU7YPI903ab956
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="group_id"
+
+1
+--WebAppBoundary
+Content-Disposition: form-data; name="files_ids[]"
+
+8 ,9 ,10
+--WebAppBoundary
+
+###
+# @name removeFilesFromGroup
+POST http://127.0.0.1:8000/api/removeFilesFromGroup
+Authorization: Bearer 4|M6JtE0ETxKtaR475PsSVr3ZZtT5f66Z0zUkU7YPI903ab956
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="group_id"
+
+1
+--WebAppBoundary
+Content-Disposition: form-data; name="files_ids[]"
+
+8 ,9 ,10
+--WebAppBoundary
+
+###
+# @name removeUsersFromGroup
+POST http://127.0.0.1:8000/api/removeUsersFromGroup
+Authorization: Bearer 4|M6JtE0ETxKtaR475PsSVr3ZZtT5f66Z0zUkU7YPI903ab956
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="group_id"
+
+1
+--WebAppBoundary
+Content-Disposition: form-data; name="users_ids[]"
+
+2 ,3
+--WebAppBoundary
+
+###
+# @name addUsersToGroup
+POST http://127.0.0.1:8000/api/addUsersToGroup
+Authorization: Bearer 4|M6JtE0ETxKtaR475PsSVr3ZZtT5f66Z0zUkU7YPI903ab956
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="group_id"
+
+1
+--WebAppBoundary
+Content-Disposition: form-data; name="users_ids[]"
+
+2 ,3
+--WebAppBoundary

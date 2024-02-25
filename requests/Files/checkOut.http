@@ -1,0 +1,14 @@
+# @name checkOut
+POST {{host}}/api/checkOut
+Authorization: Bearer {{user_token}}
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="new file.txt"
+
+< C:\Users\Nicol\OneDrive\Desktop\Notepad\useful shortcuts.txt
+--WebAppBoundary
+Content-Disposition: form-data; name="id"
+
+1
+--WebAppBoundary

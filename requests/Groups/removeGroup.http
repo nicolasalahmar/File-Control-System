@@ -1,0 +1,4 @@
+GET {{host}}/api/removeGroup/1
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{user_token}}
